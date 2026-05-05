@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/api")
+@RestController()
+@RequestMapping("/api")
 public class UserController {
 
     private final UserRepository userRepo;
