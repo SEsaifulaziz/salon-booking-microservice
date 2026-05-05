@@ -6,6 +6,7 @@ import com.devsaif.salon.booking.microservices.repository.UserRepository;
 import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,22 @@ public class UserController {
         throw new Exception("user not found");
     }
 
+    @PutMapping("/update/{id}")
+    public User updateUser(@RequestBody User user, @PathVariable Long id) throws Exception{
+        Optional<User> findUser = userRepo.findById(id);
+        if(findUser.isEmpty()){
+            throw new Exception("user not found!");
+        }
+        User existingUser = findUser.get();
+
+        existingUser.setFullName(user.getFullName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPhone(user.getPhone());
+        existingUser.setUpdatedAt(LocalDateTime.now());
+        existingUser.setRole(user.getRole());
+
+        return userRepo.save(existingUser);
+    }
 
 
    }
