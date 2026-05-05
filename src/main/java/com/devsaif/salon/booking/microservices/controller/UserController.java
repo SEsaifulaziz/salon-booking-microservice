@@ -28,5 +28,15 @@ public class UserController {
         return userRepo.findAll();
     }
 
+    @GetMapping("/byId/{id}")
+    public User getUserById(@PathVariable Long id) throws Exception {
+        Optional<User> user = userRepo.findById(id);
+        if(user.isPresent()){
+            return user.get();
+        }
+        throw new Exception("user not found");
+    }
+
+
 
    }
