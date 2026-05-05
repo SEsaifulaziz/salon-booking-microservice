@@ -55,5 +55,9 @@ public class UserController {
         return userRepo.save(existingUser);
     }
 
+    @DeleteMapping("/deleteAll")
+    public void deleteAll(){
+        userRepo.deleteAll();
+    }
 
    }
