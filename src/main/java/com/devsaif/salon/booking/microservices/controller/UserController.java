@@ -60,4 +60,16 @@ public class UserController {
         userRepo.deleteAll();
     }
 
+    @DeleteMapping("/deleteById/{id}")
+    public String deleteById(@PathVariable Long id) throws Exception{
+        Optional<User> user = userRepo.findById(id);
+        if (user.isEmpty()){
+            throw new Exception("user not found!!");
+
+        }
+        userRepo.deleteById(user.get().getId());
+        return "user deleted";
+
+    }
+
    }
