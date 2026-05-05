@@ -3,7 +3,7 @@ package com.devsaif.salon.booking.microservices.controller;
 
 import com.devsaif.salon.booking.microservices.model.User;
 import com.devsaif.salon.booking.microservices.repository.UserRepository;
-import org.aspectj.apache.bcel.classfile.Module;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody @Valid User user){
         return userRepo.save(user);
     }
 
