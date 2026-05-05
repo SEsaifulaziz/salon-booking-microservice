@@ -3,20 +3,26 @@ package com.devsaif.salon.booking.microservices.controller;
 
 import com.devsaif.salon.booking.microservices.model.User;
 import com.devsaif.salon.booking.microservices.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.aspectj.apache.bcel.classfile.Module;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController("/api")
-@RequiredArgsConstructor
 public class UserController {
 
+    private final UserRepository userRepo;
 
-    private UserRepository userRepo;
+    public UserController(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         return userRepo.save(user);
+
     }
-}
+
+
+   }
