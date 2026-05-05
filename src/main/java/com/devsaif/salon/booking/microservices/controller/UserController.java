@@ -21,7 +21,11 @@ public class UserController {
     @PostMapping("/users")
     public User createUser(@RequestBody User user){
         return userRepo.save(user);
+    }
 
+    @GetMapping("/getusers")
+    public List<User> getUsers(){
+        return userRepo.findAll();
     }
 
 
