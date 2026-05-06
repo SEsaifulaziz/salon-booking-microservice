@@ -1,6 +1,7 @@
 package com.devsaif.salon.booking.microservices.controller;
 
 
+import com.devsaif.salon.booking.microservices.exception.UserException;
 import com.devsaif.salon.booking.microservices.model.User;
 import com.devsaif.salon.booking.microservices.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -30,20 +31,22 @@ public class UserController {
         return userRepo.findAll();
     }
 
-    @GetMapping("/byId/{id}")
+    @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Long id) throws Exception {
         Optional<User> user = userRepo.findById(id);
         if(user.isPresent()){
             return user.get();
         }
-        throw new Exception("user not found");
+        throw new UserException("user not found");
     }
 
-    @PutMapping("/update/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable Long id) throws Exception{
+    @PutMapping("/users/{id}")
+    public User updateUser(@RequestBody User user,
+                           @PathVariable Long id) throws Exception{
+
         Optional<User> findUser = userRepo.findById(id);
         if(findUser.isEmpty()){
-            throw new Exception("user not found!");
+            throw new UserException("user not found!");
         }
         User existingUser = findUser.get();
 
@@ -65,7 +68,7 @@ public class UserController {
     public String deleteById(@PathVariable Long id) throws Exception{
         Optional<User> user = userRepo.findById(id);
         if (user.isEmpty()){
-            throw new Exception("user not found!!");
+            throw new UserException("user not found!!");
 
         }
         userRepo.deleteById(user.get().getId());
