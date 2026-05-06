@@ -1,9 +1,9 @@
-package com.devsaif.salon.booking.microservices.service.impl;
+package com.devsaif.service.impl;
 
-import com.devsaif.salon.booking.microservices.exception.UserException;
-import com.devsaif.salon.booking.microservices.model.User;
-import com.devsaif.salon.booking.microservices.repository.UserRepository;
-import com.devsaif.salon.booking.microservices.service.UserService;
+import com.devsaif.exception.UserException;
+import com.devsaif.model.User;
+import com.devsaif.repository.UserRepository;
+import com.devsaif.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
         User existingUser = findUser.get();
 
         existingUser.setFullName(user.getFullName());
+        existingUser.setUserName(user.getUserName());
         existingUser.setEmail(user.getEmail());
         existingUser.setPhone(user.getPhone());
         existingUser.setUpdatedAt(LocalDateTime.now());

@@ -1,4 +1,4 @@
-package com.devsaif.salon.booking.microservices.exception;
+package com.devsaif.exception;
 
 public class UserException extends Exception{
     public UserException(String message){

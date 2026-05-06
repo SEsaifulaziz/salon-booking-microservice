@@ -1,7 +1,7 @@
-package com.devsaif.salon.booking.microservices.service;
+package com.devsaif.service;
 
-import com.devsaif.salon.booking.microservices.exception.UserException;
-import com.devsaif.salon.booking.microservices.model.User;
+import com.devsaif.exception.UserException;
+import com.devsaif.model.User;
 
 import java.util.List;
 

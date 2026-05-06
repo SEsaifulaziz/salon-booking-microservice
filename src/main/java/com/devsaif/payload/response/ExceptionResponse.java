@@ -1,4 +1,4 @@
-package com.devsaif.salon.booking.microservices.payload.response;
+package com.devsaif.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

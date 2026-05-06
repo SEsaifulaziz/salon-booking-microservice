@@ -1,6 +1,6 @@
-package com.devsaif.salon.booking.microservices.exception;
+package com.devsaif.exception;
 
-import com.devsaif.salon.booking.microservices.payload.response.ExceptionResponse;
+import com.devsaif.payload.response.ExceptionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

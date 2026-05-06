@@ -1,4 +1,4 @@
-package com.devsaif.salon.booking.microservices;
+package com.devsaif;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

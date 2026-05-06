@@ -1,8 +1,8 @@
-package com.devsaif.salon.booking.microservices.controller;
+package com.devsaif.controller;
 
 
-import com.devsaif.salon.booking.microservices.model.User;
-import com.devsaif.salon.booking.microservices.service.UserService;
+import com.devsaif.model.User;
+import com.devsaif.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

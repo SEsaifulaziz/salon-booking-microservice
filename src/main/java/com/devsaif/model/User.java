@@ -1,4 +1,4 @@
-package com.devsaif.salon.booking.microservices.model;
+package com.devsaif.model;
 
 
 import jakarta.persistence.Entity;

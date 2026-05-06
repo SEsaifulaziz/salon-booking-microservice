@@ -1,4 +1,4 @@
-package com.devsaif.salon.booking.microservices;
+package com.devsaif;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

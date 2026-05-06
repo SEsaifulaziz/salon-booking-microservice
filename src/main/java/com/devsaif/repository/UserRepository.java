@@ -1,6 +1,6 @@
-package com.devsaif.salon.booking.microservices.repository;
+package com.devsaif.repository;
 
-import com.devsaif.salon.booking.microservices.model.User;
+import com.devsaif.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

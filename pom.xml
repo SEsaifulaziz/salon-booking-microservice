@@ -14,7 +14,7 @@
 	</parent>
 
 	<groupId>com.devsaif</groupId>
-	<artifactId>salon-booking-microservices</artifactId>
+	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>salon-booking-microservices</name>
 	<description>Salon Booking Microservices Project</description>
@@ -72,7 +72,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
