@@ -1,4 +1,17 @@
 package com.devsaif.salon.booking.microservices.payload.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class ExceptionResponse {
+    private String message;
+    private String error;
+    private LocalDateTime timestamp;
 }
