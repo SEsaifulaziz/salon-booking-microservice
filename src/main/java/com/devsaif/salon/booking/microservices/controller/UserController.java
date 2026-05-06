@@ -43,11 +43,11 @@ public class UserController {
                            @PathVariable Long id) throws Exception{
         User updatedUser = userService.updateUser(id, user);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-
     }
 
     @DeleteMapping("/deleteAll")
     public void deleteAll(){
+        userService.deleteAllUsers();
     }
 
     @DeleteMapping("/deleteById/{id}")
