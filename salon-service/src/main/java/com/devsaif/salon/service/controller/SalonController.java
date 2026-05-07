@@ -63,6 +63,26 @@ public class SalonController {
         return new ResponseEntity<>(salonDto, HttpStatus.OK);
     }
 
+    @GetMapping("/search/{}")
+    public ResponseEntity<List<SalonDto>> searchSalons(
+            @RequestParam("city") String city) throws Exception {
+
+        UserDto userDto = new UserDto();
+        userDto.setId(1L);
+
+        List<Salon> salons = salonService.searchSalonByCityName(city);
+
+        List<SalonDto> salonDTOs = salons.stream().map((salon) ->
+                {
+                    SalonDto salonDto = SalonMapper.mapToDto(salon);
+                    return salonDto;
+                }
+        ).toList();
+        return new ResponseEntity<>(salonDTOs, HttpStatus.OK);
+    }
+
+
+
 
 
 
