@@ -53,6 +53,15 @@ public class SalonController {
         return new ResponseEntity<>(salonDto1, HttpStatus.OK);
     }
 
+    @GetMapping("/{salonId}")
+    public ResponseEntity<SalonDto> getSalonById(@PathVariable Long salonId) throws Exception {
+        UserDto userDto = new UserDto();
+        userDto.setId(1L);
+
+        Salon salon = salonService.getSalonById(salonId);
+        SalonDto salonDto = SalonMapper.mapToDto(salon);
+        return new ResponseEntity<>(salonDto, HttpStatus.OK);
+    }
 
 
 
