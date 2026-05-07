@@ -14,9 +14,9 @@ public interface SalonService {
 
     List<Salon> getSalons();
 
-    Salon getSalonById(Long id);
+    Salon getSalonById(Long id) throws Exception;
 
-    Salon DeleteAll();
+    void DeleteAll();
 
     Salon DeleteById(Long id);
 
