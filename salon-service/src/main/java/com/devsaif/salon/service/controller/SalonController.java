@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/salons")
 @RequiredArgsConstructor
 public class SalonController {
 
@@ -26,7 +28,19 @@ public class SalonController {
         return new ResponseEntity<>(salonDto1, HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<List<SalonDto>> getSalons() {
+        UserDto userDto = new UserDto();
+        userDto.setId(1L);
+        List<Salon> salons = salonService.getSalons();
 
+        List<SalonDto> salonDTOs = salons.stream().map((salon) ->
+                 {
+                      SalonDto salonDto1 = SalonMapper.mapToDto(salon);
+                      return salonDto1;
+                 }).toList();
+        return new ResponseEntity<>(salonDTOs, HttpStatus.OK);
+    }
 
 
 
