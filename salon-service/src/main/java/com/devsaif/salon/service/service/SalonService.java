@@ -10,7 +10,7 @@ public interface SalonService {
 
     Salon createSalon(SalonDto salon, UserDto user);
 
-    Salon updateSalon(SalonDto salon, UserDto user,  Long salonId);
+    Salon updateSalon(SalonDto salon, UserDto user, Long salonId);
 
     List<Salon> getSalons();
 
