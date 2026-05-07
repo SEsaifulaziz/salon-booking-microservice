@@ -35,8 +35,23 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public Salon updateSalon(SalonDto salon, UserDto user, Long salonId) {
-        return null;
+    public Salon updateSalon(SalonDto salon, UserDto user, Long salonId) throws Exception {
+        Salon existingSalon = salonRepo.findById(salonId).orElse(null);
+        if(existingSalon != null && salon.getOwnerId().equals(user.getId())) {
+            existingSalon.setName(salon.getName());
+            existingSalon.setAddress(salon.getAddress());
+            existingSalon.setOwnerId(user.getId());
+            existingSalon.setCity(salon.getCity());
+            existingSalon.setPhoneNumber(salon.getPhoneNumber());
+            existingSalon.setEmail(salon.getEmail());
+            existingSalon.setImages(salon.getImages());
+            existingSalon.setOpeningTime(salon.getOpeningTime());
+            existingSalon.setClosingTime(salon.getClosingTime());
+            existingSalon.setPhoneNumber(salon.getPhoneNumber());
+
+            return salonRepo.save(existingSalon);
+        }
+        throw new Exception("salon not found!");
     }
 
     @Override
