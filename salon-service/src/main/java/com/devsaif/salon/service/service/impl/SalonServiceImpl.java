@@ -56,17 +56,21 @@ public class SalonServiceImpl implements SalonService {
 
     @Override
     public List<Salon> getSalons() {
-        return List.of();
+        return salonRepo.findAll();
     }
 
     @Override
-    public Salon getSalonById(Long id) {
-        return null;
+    public Salon getSalonById(Long id) throws Exception {
+        Salon salon = salonRepo.findById(id).orElse(null);
+        if(salon == null) {
+            throw new Exception("salon not found!");
+        }
+        return salon;
     }
 
     @Override
-    public Salon DeleteAll() {
-        return null;
+    public void DeleteAll() {
+        salonRepo.deleteAll();
     }
 
     @Override
@@ -76,11 +80,11 @@ public class SalonServiceImpl implements SalonService {
 
     @Override
     public Salon getSalonByOwnerId(Long ownerId) {
-        return null;
+        return salonRepo.findByOwnerId(ownerId);
     }
 
     @Override
     public List<Salon> searchSalonByCityName(String cityName) {
-        return List.of();
+        return salonRepo.searchSalons(cityName);
     }
 }
