@@ -1,6 +1,7 @@
 package com.devsaif.salon.service.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,10 @@ public class Salon {
 
     @Column(nullable = false)
     private String address;
+
+    @Email
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private String phoneNumber;
