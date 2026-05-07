@@ -3,17 +3,35 @@ package com.devsaif.salon.service.service.impl;
 import com.devsaif.salon.service.model.Salon;
 import com.devsaif.salon.service.paload.dto.SalonDto;
 import com.devsaif.salon.service.paload.dto.UserDto;
+import com.devsaif.salon.service.repository.SalonRepository;
 import com.devsaif.salon.service.service.SalonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SalonServiceImpl implements SalonService {
 
+    private final SalonRepository salonRepo;
+
+
     @Override
-    public Salon createSalon(SalonDto salon, UserDto user) {
-        return null;
+    public Salon createSalon(SalonDto req, UserDto user) {
+        Salon salon = new Salon();
+        salon.setName(req.getName());
+        salon.setAddress(req.getAddress());
+        salon.setCity(req.getCity());
+        salon.setPhoneNumber(req.getPhoneNumber());
+        salon.setEmail(req.getEmail());
+        salon.setImages(req.getImages());
+        salon.setOwnerId(user.getId());
+        salon.setOpeningTime(req.getOpeningTime());
+        salon.setClosingTime(req.getClosingTime());
+        salon.setPhoneNumber(req.getPhoneNumber());
+
+        return salonRepo.save(salon);
     }
 
     @Override
