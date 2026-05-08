@@ -30,8 +30,7 @@ public class SalonController {
 
     @GetMapping()
     public ResponseEntity<List<SalonDto>> getSalons() {
-        UserDto userDto = new UserDto();
-        userDto.setId(1L);
+
         List<Salon> salons = salonService.getSalons();
 
         List<SalonDto> salonDTOs = salons.stream().map((salon) ->
@@ -55,20 +54,17 @@ public class SalonController {
 
     @GetMapping("/{salonId}")
     public ResponseEntity<SalonDto> getSalonById(@PathVariable Long salonId) throws Exception {
-        UserDto userDto = new UserDto();
-        userDto.setId(1L);
 
         Salon salon = salonService.getSalonById(salonId);
         SalonDto salonDto = SalonMapper.mapToDto(salon);
         return new ResponseEntity<>(salonDto, HttpStatus.OK);
     }
 
-    @GetMapping("/search/{}")
+
+    //     http://localhost:5002/api/salons/search?city = abbottabad
+    @GetMapping("/search")
     public ResponseEntity<List<SalonDto>> searchSalons(
             @RequestParam("city") String city) throws Exception {
-
-        UserDto userDto = new UserDto();
-        userDto.setId(1L);
 
         List<Salon> salons = salonService.searchSalonByCityName(city);
 
@@ -79,6 +75,16 @@ public class SalonController {
                 }
         ).toList();
         return new ResponseEntity<>(salonDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/ownerId/{id}")
+    public ResponseEntity<SalonDto> getSalonByOwnerId(@PathVariable Long id) throws Exception {
+      UserDto userDto = new UserDto();
+      userDto.setId(1L);
+
+      Salon salon = salonService.getSalonByOwnerId(userDto.getId());
+      SalonDto salonDto = SalonMapper.mapToDto(salon);
+      return new ResponseEntity<>(salonDto, HttpStatus.OK);
     }
 
 
