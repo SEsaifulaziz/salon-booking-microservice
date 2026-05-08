@@ -87,6 +87,18 @@ public class SalonController {
       return new ResponseEntity<>(salonDto, HttpStatus.OK);
     }
 
+    @DeleteMapping()
+    public ResponseEntity<Salon> deleteAll(){
+        salonService.DeleteAll();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Salon> deleteById(@PathVariable Long id) throws Exception {
+        Salon salon = salonService.getSalonById(id);
+        salonService.DeleteById(salon.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 

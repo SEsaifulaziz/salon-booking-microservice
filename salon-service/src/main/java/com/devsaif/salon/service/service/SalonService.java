@@ -18,7 +18,7 @@ public interface SalonService {
 
     void DeleteAll();
 
-    Salon DeleteById(Long id);
+    void DeleteById(Long id);
 
     Salon getSalonByOwnerId(Long ownerId);
 

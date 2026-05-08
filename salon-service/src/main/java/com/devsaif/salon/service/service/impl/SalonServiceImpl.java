@@ -37,7 +37,10 @@ public class SalonServiceImpl implements SalonService {
     @Override
     public Salon updateSalon(SalonDto salon, UserDto user, Long salonId) throws Exception {
         Salon existingSalon = salonRepo.findById(salonId).orElse(null);
-        if(existingSalon != null && salon.getOwnerId().equals(user.getId())) {
+        if(!salon.getOwnerId().equals(user.getId())){
+            throw new Exception("you don't have the permission to update this salon");
+        }
+        if(existingSalon != null) {
             existingSalon.setName(salon.getName());
             existingSalon.setAddress(salon.getAddress());
             existingSalon.setOwnerId(user.getId());
@@ -74,8 +77,8 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public Salon DeleteById(Long id) {
-        return null;
+    public void DeleteById(Long id) {
+        salonRepo.deleteById(id);
     }
 
     @Override
