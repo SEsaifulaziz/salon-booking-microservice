@@ -14,9 +14,9 @@ public interface CategoryService {
 
     Set<Category> getAllCategoriesBySalonId(Long id);
 
-    Category getCategoryById(Long categoryId);
+    Category getCategoryById(Long categoryId) throws Exception;
 
-    void deleteCategory(Long id);
+    void deleteCategoryById(Long id, Long salonId) throws Exception;
 
     void deleteAllCategories();
 }
