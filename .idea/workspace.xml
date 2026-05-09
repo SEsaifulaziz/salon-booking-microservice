@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2db36ae5-2645-49b4-b96d-bf3d158075e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/controller/HomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/controller/ServiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/db-forest-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/service/ServiceOfferingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/service/ServiceOfferingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,12 +56,15 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Back-end Development/Microservices/Salon-Booking-Project",
+    "last_opened_file_path": "D:/Back-end Development/Microservices/Salon-Booking-Project/service-offering/src/main/java/com/devsaif/service/offering",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Back-end Development\Microservices\Salon-Booking-Project\service-offering\src\main\java\com\devsaif\service\offering" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.devsaif.service.offering.controller" />
     </key>
@@ -113,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1778317104342</updated>
-      <workItem from="1778317105792" duration="911000" />
+      <workItem from="1778317105792" duration="2990000" />
     </task>
     <servers />
   </component>
