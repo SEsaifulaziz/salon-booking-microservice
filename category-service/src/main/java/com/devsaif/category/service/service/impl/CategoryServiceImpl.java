@@ -7,6 +7,7 @@ import com.devsaif.category.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -50,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(Long id, Long salonId) throws Exception {
         Category category = getCategoryById(id);
 
-        if(category.getId() != salonId){
+        if(!category.getSalonId().equals(salonId)){
             throw new Exception("you don't have permission to delete this Category");
         }
         categoryRepo.deleteById(id);
