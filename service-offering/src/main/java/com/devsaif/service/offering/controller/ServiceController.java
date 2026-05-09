@@ -1,4 +1,4 @@
 package com.devsaif.service.offering.controller;
 
-public class ServiceControler {
+public class ServiceController {
 }

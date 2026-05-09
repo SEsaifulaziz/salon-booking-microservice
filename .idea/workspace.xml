@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="735544ed-06cc-4c43-822c-0c50f16dd346" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/category-service/src/main/java/com/devsaif/category/service/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/category-service/src/main/java/com/devsaif/category/service/controller/CategoryController.java" afterDir="false" />
+    <list default="true" id="2db36ae5-2645-49b4-b96d-bf3d158075e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-offering/src/main/java/com/devsaif/service/offering/controller/ServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/db-forest-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,48 +37,42 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="3DSJlA8oOPQQKB5wCzuK15RI41z" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="3DTrsDjzD0mr72krxu4C5M7MS91" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CategoryServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Back-end Development/Microservices/Salon-Booking-Project/category-service/src/main/java/com/devsaif/category/service&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.ServiceOfferingApplication.executor": "Run",
+    "Spring Boot.UserServiceApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Back-end Development/Microservices/Salon-Booking-Project",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Back-end Development\Microservices\Salon-Booking-Project\category-service\src\main\java\com\devsaif\category\service" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.devsaif.controller" />
-      <recent name="com.devsaif.salon.service.controller" />
+      <recent name="com.devsaif.service.offering.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CategoryServiceApplication">
+  <component name="RunManager" selected="Spring Boot.ServiceOfferingApplication">
     <configuration name="CategoryServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="category-service" />
@@ -87,6 +89,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServiceOfferingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="service-offering" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.devsaif.service.offering.ServiceOfferingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="user-service" />
@@ -98,14 +108,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="735544ed-06cc-4c43-822c-0c50f16dd346" name="Changes" comment="" />
-      <created>1778269692516</created>
+      <changelist id="2db36ae5-2645-49b4-b96d-bf3d158075e4" name="Changes" comment="" />
+      <created>1778317104342</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1778269692516</updated>
-      <workItem from="1778269695160" duration="3019000" />
-      <workItem from="1778310382013" duration="622000" />
-      <workItem from="1778313158131" duration="3006000" />
+      <updated>1778317104342</updated>
+      <workItem from="1778317105792" duration="911000" />
     </task>
     <servers />
   </component>
