@@ -23,7 +23,7 @@ public class SalonCategoryController {
         return ResponseEntity.ok().body(savedCategory);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<String> deleteCategoryById(@PathVariable Long id) throws Exception{
         SalonDto salonDto = new SalonDto();
         salonDto.setId(1L);
