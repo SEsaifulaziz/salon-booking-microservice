@@ -1,4 +1,4 @@
-package com.devsaif.salon.service.paload.dto;
+package com.devsaif.service.offering.dto;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class SalonDto {
+public class SalonDTO {
 
     private Long id;
 
