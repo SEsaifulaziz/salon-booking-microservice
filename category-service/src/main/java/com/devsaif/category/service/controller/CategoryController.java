@@ -5,10 +5,7 @@ import com.devsaif.category.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -33,5 +30,15 @@ public class CategoryController {
     }
 
 
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<String> deleteAllCategories() {
+        categoryService.deleteAllCategories();
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> getAll = categoryService.getAll();
+        return new ResponseEntity<>(getAll, HttpStatus.OK);
+    }
 }

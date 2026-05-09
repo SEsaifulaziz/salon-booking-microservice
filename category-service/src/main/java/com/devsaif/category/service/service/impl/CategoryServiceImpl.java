@@ -7,7 +7,7 @@ import com.devsaif.category.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -45,6 +45,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return category;
+    }
+
+    @Override
+    public List<Category> getAll() {
+        return categoryRepo.findAll();
     }
 
     @Override
