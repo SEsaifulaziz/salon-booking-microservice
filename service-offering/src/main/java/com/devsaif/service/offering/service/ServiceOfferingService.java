@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface ServiceOfferingService {
 
-    ServiceOffering create(SalonDTO salondto, ServiceDTO servicedto, CategoryDTO categoryDto);
+    ServiceOffering createService(SalonDTO salondto, ServiceDTO servicedto, CategoryDTO categoryDto);
 
     ServiceOffering update(Long serviceId, ServiceOffering service);
 
