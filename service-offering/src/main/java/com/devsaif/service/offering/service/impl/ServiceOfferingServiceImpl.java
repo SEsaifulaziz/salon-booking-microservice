@@ -9,7 +9,9 @@ import com.devsaif.service.offering.service.ServiceOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,8 +55,17 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
     }
 
     @Override
-    public Set<ServiceOffering> getAllServiceBySalonId(Long serviceId, Long categoryId) {
-        return Set.of();
+    public Set<ServiceOffering> getAllServiceBySalonId(Long salonId, Long categoryId) {
+
+        Set<ServiceOffering> services = serviceOfferingRepo.getBySalonId(salonId);
+
+        if(categoryId != null){
+            services = services.stream().filter((service) ->
+                    service.getCategoryId() !=null &&
+                service.getCategoryId() == categoryId).collect(Collectors.toSet());
+        }
+        return services;
+
     }
 
     @Override
