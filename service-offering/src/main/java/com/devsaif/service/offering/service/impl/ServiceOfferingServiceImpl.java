@@ -63,7 +63,7 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
         if(categoryId != null){
             services = services.stream().filter((service) ->
                     service.getCategoryId() !=null &&
-                service.getCategoryId() == categoryId).collect(Collectors.toSet());
+                service.getCategoryId().equals(categoryId)).collect(Collectors.toSet());
         }
         return services;
 
