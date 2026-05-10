@@ -8,13 +8,8 @@ import com.devsaif.service.offering.model.ServiceOffering;
 import com.devsaif.service.offering.service.ServiceOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +28,15 @@ public class SalonServiceOfferingController {
         categoryDTO.setId(serviceDTO.getCategoryId());
 
         ServiceOffering serviceOfferings = serviceOfferingService.createService(salonDTO, serviceDTO, categoryDTO);
-        return ResponseEntity.ok(serviceOfferings);
 
+        return ResponseEntity.ok(serviceOfferings);
+    }
+
+    @PatchMapping("/{serviceId}")
+    public ResponseEntity<ServiceOffering> updateService(@PathVariable Long serviceId, @RequestBody ServiceOffering serviceOffering) throws Exception {
+
+        ServiceOffering updateServiceOffering = serviceOfferingService.updateService(serviceId, serviceOffering);
+
+        return ResponseEntity.ok(updateServiceOffering);
     }
 }
