@@ -35,8 +35,21 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
     }
 
     @Override
-    public ServiceOffering update(Long serviceId, ServiceOffering service) {
-        return null;
+    public ServiceOffering updateService(Long serviceId, ServiceOffering service) throws Exception {
+
+        ServiceOffering serviceOffering = serviceOfferingRepo.findById(serviceId).orElse(null);
+
+        if(serviceOffering == null){
+            throw new Exception("service not found");
+        }
+
+        serviceOffering.setImage(service.getImage());
+        serviceOffering.setName(service.getName());
+        serviceOffering.setDescription(service.getDescription());
+        serviceOffering.setPrice(service.getPrice());
+        serviceOffering.setDuration(service.getDuration());
+
+        return serviceOfferingRepo.save(serviceOffering);
     }
 
     @Override
