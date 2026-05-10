@@ -69,10 +69,6 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
 
     }
 
-    @Override
-    public void deleteById(Long id) {
-        serviceOfferingRepo.deleteById(id);
-    }
 
     @Override
     public Set<ServiceOffering> getServiceByIds(Set<Long> ids) {
