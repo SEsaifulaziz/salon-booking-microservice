@@ -33,4 +33,12 @@ public class ServiceOfferingController {
         return new ResponseEntity<>(serviceOffering, HttpStatus.OK);
     }
 
+
+    @GetMapping("/List/{ids}")
+    public ResponseEntity<Set<ServiceOffering>> getServiceByIds(@PathVariable Set<Long> ids) throws Exception{
+        Set<ServiceOffering> serviceOfferings = serviceOfferingService.getServiceByIds(ids);
+        return new ResponseEntity<>(serviceOfferings, HttpStatus.OK);
+    }
+
+
 }
