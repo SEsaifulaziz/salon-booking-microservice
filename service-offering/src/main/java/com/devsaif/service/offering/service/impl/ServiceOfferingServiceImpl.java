@@ -79,4 +79,14 @@ public class ServiceOfferingServiceImpl implements ServiceOfferingService {
         List<ServiceOffering> services =  serviceOfferingRepo.findAllById(ids);
         return new HashSet<>(services);
     }
+
+    @Override
+    public ServiceOffering getServiceById(Long id) throws Exception {
+        ServiceOffering serviceOffering = serviceOfferingRepo.findById(id).orElse(null);
+
+        if(serviceOffering == null){
+            throw new Exception("service not found");
+        }
+        return serviceOffering;
+    }
 }

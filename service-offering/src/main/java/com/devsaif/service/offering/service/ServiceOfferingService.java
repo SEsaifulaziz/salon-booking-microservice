@@ -20,5 +20,5 @@ public interface ServiceOfferingService {
 
     Set<ServiceOffering> getServiceByIds(Set<Long> ids);
 
-
+    ServiceOffering getServiceById(Long id) throws Exception;
 }
