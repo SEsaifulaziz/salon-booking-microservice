@@ -103,8 +103,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking getBookingById(Long id) {
-        return null;
+    public Booking getBookingById(Long id) throws Exception {
+        Booking booking = bookingRepo.findById(id).orElse(null);
+
+        if(booking == null){
+            throw new Exception("booking with id " + booking + " not found!");
+        }
+        return booking;
     }
 
     @Override
