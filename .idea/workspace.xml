@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59e2e50-7aac-41aa-8cc1-8e332405d3e7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/dto/ServiceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/dto/ServiceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/service/BookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/service/impl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking-service/src/main/java/com/devsaif/booking/service/service/impl/BookingServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="f59e2e50-7aac-41aa-8cc1-8e332405d3e7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1778520146281</updated>
-      <workItem from="1778520151973" duration="4871000" />
+      <workItem from="1778520151973" duration="5187000" />
     </task>
     <servers />
   </component>

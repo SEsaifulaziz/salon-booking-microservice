@@ -94,7 +94,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingsByCustomerId(Long customerId) {
-        return List.of();
+        return bookingRepo.findByCustomerId(customerId);
     }
 
     @Override
