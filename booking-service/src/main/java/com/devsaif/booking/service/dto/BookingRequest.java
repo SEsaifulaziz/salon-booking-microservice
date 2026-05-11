@@ -1,8 +1,12 @@
 package com.devsaif.booking.service.dto;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
+
+@Data
 public class BookingRequest {
 
     private LocalDateTime startTime;
