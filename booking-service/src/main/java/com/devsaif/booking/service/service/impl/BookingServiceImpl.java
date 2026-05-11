@@ -99,7 +99,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingBySalonId(Long salonId) {
-        return List.of();
+        return bookingRepo.findBySalonId(salonId);
     }
 
     @Override
