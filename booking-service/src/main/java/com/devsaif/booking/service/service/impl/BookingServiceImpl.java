@@ -7,18 +7,63 @@ import com.devsaif.booking.service.dto.ServiceDTO;
 import com.devsaif.booking.service.dto.UserDTO;
 import com.devsaif.booking.service.model.Booking;
 import com.devsaif.booking.service.model.SalonReport;
+import com.devsaif.booking.service.repository.BookingRepository;
 import com.devsaif.booking.service.service.BookingService;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.jaxb.internal.stax.LocalSchemaLocator;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class BookingServiceImpl implements BookingService {
+
+    private final BookingRepository bookingRepo;
+
     @Override
-    public Booking createBooking(BookingRequest booking, UserDTO userDTO, SalonDTO salonDTO, Set<ServiceDTO> services) {
+    public Booking createBooking(BookingRequest booking,
+                                 UserDTO userDTO,
+                                 SalonDTO salonDTO,
+                                 Set<ServiceDTO> services) {
         return null;
+
+
+
+    }
+
+    public Boolean isTimeSlotAvailable(SalonDTO salonDTO,
+                                       LocalDateTime bookingStartTime,
+                                       LocalDateTime bookingEndTime) throws Exception {
+
+        List<Booking> existingBookings = getBookingBySalonId(salonDTO.getId());
+
+        LocalDateTime salonOpeningTime = salonDTO.getOpeningTime().atDate(bookingStartTime.toLocalDate());
+        LocalDateTime salonClosingTime = salonDTO.getClosingTime().atDate(bookingEndTime.toLocalDate());
+
+        if(bookingStartTime.isBefore(salonOpeningTime)
+                || bookingEndTime.isAfter(salonClosingTime)){
+            throw new Exception("Booking time be within salon's working hours");
+        }
+
+        for(Booking existingBooking : existingBookings){
+            LocalDateTime existingBookingStartTime = existingBooking.getStartTime();
+            LocalDateTime existingBookingEndTime = existingBooking.getEndTime();
+
+            if(existingBookingStartTime.isBefore(existingBookingEndTime)
+                    && bookingEndTime.isAfter(existingBookingStartTime)){
+                throw new Exception("slot not available, choose different time");
+            }
+
+            if(bookingStartTime.equals(existingBookingStartTime)
+                    || bookingEndTime.equals(existingBookingEndTime)){
+                throw new Exception("slot not available, choose different time");
+            }
+        }
+
     }
 
     @Override
