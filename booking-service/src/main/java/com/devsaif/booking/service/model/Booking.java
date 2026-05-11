@@ -1,7 +1,7 @@
 package com.devsaif.booking.service.model;
 
 
-import com.devsaif.booking.service.status.BookingStatus;
+import com.devsaif.booking.service.domain.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,12 +27,8 @@ public class Booking {
     @ElementCollection
     private Set<Long> serviceIds;
 
-    private BookingStatus status;
+    private BookingStatus status = BookingStatus.PENDING;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String email;
+    private int bookingPrice;
 
 }
