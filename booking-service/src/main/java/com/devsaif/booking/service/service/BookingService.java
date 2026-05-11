@@ -22,7 +22,7 @@ public interface BookingService {
     List<Booking> getBookingsByCustomerId(Long customerId);
     List<Booking> getBookingBySalonId(Long salonId);
     Booking getBookingById(Long id) throws Exception;
-    Booking updateBooking(Long id, BookingStatus bookingStatus);
+    Booking updateBooking(Long id, BookingStatus bookingStatus) throws Exception;
     List<Booking> getBookingsByDate(LocalDate date, Long salonId);
     SalonReport getSalonReport(Long salonId);
 }
