@@ -1,6 +1,5 @@
-package com.devsaif.service.offering.dto;
+package com.devsaif.booking.service.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
