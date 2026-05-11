@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +29,32 @@ public class BookingServiceImpl implements BookingService {
     public Booking createBooking(BookingRequest booking,
                                  UserDTO userDTO,
                                  SalonDTO salonDTO,
-                                 Set<ServiceDTO> services) {
-        return null;
+                                 Set<ServiceDTO> services) throws Exception {
 
+        int totalDuration = services.stream().
+                mapToInt(ServiceDTO::getDuration)
+                .sum();
 
+        LocalDateTime bookingStartTime = booking.getStartTime();
+        LocalDateTime bookingEndTime = bookingStartTime.plusDays(totalDuration);
+
+        Boolean isSlotAvailable = isTimeSlotAvailable(salonDTO, bookingStartTime, bookingEndTime);
+
+        int totalPrice = services.stream().mapToInt(ServiceDTO::getPrice).sum();
+
+        Set<Long> idList = services.stream().map(ServiceDTO::getId).collect(Collectors.toSet());
+
+        Booking newBookings = new Booking();
+
+        newBookings.setCustomerId(userDTO.getId());
+        newBookings.setSalonId(salonDTO.getId());
+        newBookings.setServiceIds(idList);
+        newBookings.setStatus(BookingStatus.PENDING);
+        newBookings.setStartTime(bookingStartTime);
+        newBookings.setEndTime(bookingEndTime);
+        newBookings.setTotalPrice(totalPrice);
+
+        return bookingRepo.save(newBookings);
 
     }
 
@@ -64,7 +87,10 @@ public class BookingServiceImpl implements BookingService {
             }
         }
 
+        return true;
     }
+
+
 
     @Override
     public List<Booking> getBookingsByCustomerId(Long customerId) {
