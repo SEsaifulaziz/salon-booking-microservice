@@ -1,5 +1,6 @@
 package com.devsaif.booking.service.controller;
 
+import com.devsaif.booking.service.domain.BookingStatus;
 import com.devsaif.booking.service.dto.*;
 import com.devsaif.booking.service.mapper.BookingMapper;
 import com.devsaif.booking.service.model.Booking;
@@ -74,6 +75,19 @@ public class BookingController {
 
         return ResponseEntity.ok(BookingMapper.toDTO(bookings));
     }
+
+
+    @PutMapping("/id/{bookingId}/status")
+    public ResponseEntity<BookingDTO> updateBookingStatus(
+            @PathVariable Long bookingId,
+            @RequestParam BookingStatus status
+    ) throws Exception {
+        Booking booking = bookingService.updateBooking(bookingId, status);
+
+        return ResponseEntity.ok(BookingMapper.toDTO(booking));
+    }
+
+
 
 
 
