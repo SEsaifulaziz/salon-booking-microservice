@@ -51,19 +51,33 @@ public class BookingController {
 
     @GetMapping("/customer/")
     public ResponseEntity<Set<BookingDTO>> getBookingsByCustomer(
-            @RequestParam Long salonId,
-            @RequestParam Long customerId
+
     ){
         List<Booking> bookings = bookingService.getBookingsByCustomerId(1L);
 
         return ResponseEntity.ok(getBookingDTOs(bookings));
     }
 
+
+    @GetMapping("/salon/")
+    public ResponseEntity<Set<BookingDTO>> getBookingsBySalon(
+
+    ){
+        List<Booking> bookings = bookingService.getBookingBySalonId(1L);
+
+        return ResponseEntity.ok(getBookingDTOs(bookings));
+    }
+
+
+
+
+
     private Set<BookingDTO> getBookingDTOs(List<Booking> bookingSet){
         return bookingSet.stream().map(booking ->  {
             return BookingMapper.toDTO(booking);
         }).collect(Collectors.toSet());
-
     }
+
+
 
 }
