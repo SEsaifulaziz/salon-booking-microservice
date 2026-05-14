@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -87,6 +89,21 @@ public class BookingController {
         return ResponseEntity.ok(BookingMapper.toDTO(booking));
     }
 
+    @GetMapping("/slot/salon/{salonId}/date/{date}")
+    public ResponseEntity<List<SlotDto>> getBookedSlot(@PathVariable Long salonId, @PathVariable @RequestParam LocalDate date) throws Exception {
+
+        List<Booking> bookings = bookingService.getBookingsByDate(date, salonId);
+
+        List<SlotDto>  slotDTOs = bookings.stream()
+                .map(booking -> {
+                    SlotDto slotDto = new SlotDto();
+                    slotDto.setStartTime(booking.getStartTime());
+                    slotDto.setEndTime(booking.getEndTime());
+                    return slotDto;
+                }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(slotDTOs);
+    }
 
 
 
