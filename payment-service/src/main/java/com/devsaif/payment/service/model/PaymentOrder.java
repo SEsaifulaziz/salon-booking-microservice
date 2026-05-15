@@ -22,7 +22,7 @@ public class PaymentOrder {
     @Column(nullable = false)
     private PaymentMethod  paymentMethod;
 
-    private String paymentLinkedId;
+    private String paymentLinkId;
 
     @Column(nullable = false)
     private Long userId;
