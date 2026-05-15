@@ -1,4 +1,11 @@
 package com.devsaif.payment.service.repository;
 
-public class PaymentRepository {
+import com.devsaif.payment.service.model.PaymentOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PaymentOrderRepository extends JpaRepository<PaymentOrder, Long> {
+
+    PaymentOrder findByPaymentLinkId(String paymentLinkId);
 }
