@@ -78,7 +78,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentOrder getPaymentByPaymentId(String paymentId) {
-        return null;
+
+        return paymentOrderRepo.findByPaymentLinkId(paymentId);
     }
 
     @Override
