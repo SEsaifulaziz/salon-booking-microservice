@@ -57,7 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
             paymentLinkResponse.setPayment_link_url(paymentUrl);
             paymentLinkResponse.setPayment_link_id(paymentUrlId);
 
-            savedOrder.setPaymentLinkedId(paymentUrlId);
+            savedOrder.setPaymentLinkId(paymentUrlId);
 
             paymentOrderRepo.save(savedOrder);
 
