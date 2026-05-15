@@ -48,7 +48,7 @@ public class PaymentController {
             @RequestParam String paymentId,
             @RequestParam String paymentLinkId
     ) throws StripeException {
-        PaymentOrder paymentOrder = paymentService.getPaymentByPaymentId(paymentId);
+        PaymentOrder paymentOrder = paymentService.getPaymentByPaymentId(paymentLinkId);
 
         Boolean response = paymentService.proceedPayment(paymentOrder,
                 paymentId,
