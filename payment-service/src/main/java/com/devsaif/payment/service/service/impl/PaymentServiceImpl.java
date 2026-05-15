@@ -1,6 +1,7 @@
 package com.devsaif.payment.service.service.impl;
 
 import com.devsaif.payment.service.domain.PaymentMethod;
+import com.devsaif.payment.service.domain.PaymentOrderStatus;
 import com.devsaif.payment.service.model.PaymentOrder;
 import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
@@ -123,7 +124,22 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Boolean proceedPayment(PaymentOrder paymentOrder, String paymentId, String paymentLinkId) {
-        return null;
+    public Boolean proceedPayment(PaymentOrder paymentOrder,
+                                  String paymentId,
+                                  String paymentLinkId) {
+
+        if(paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)){
+            if(paymentOrder.getPaymentMethod().equals(PaymentMethod.JAZZCASH)){
+
+//                produce kafka event
+
+            }else{
+                paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+                paymentOrderRepo.save(paymentOrder);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
