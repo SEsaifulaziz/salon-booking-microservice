@@ -67,7 +67,12 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentOrder gePaymentOrderById(Long id) {
+    public PaymentOrder gePaymentOrderById(Long id) throws Exception {
+
+        PaymentOrder paymentOrder = paymentOrderRepo.findById(id).orElse(null);
+        if(paymentOrder == null){
+            throw new Exception("payment order not found");
+        }
         return null;
     }
 
