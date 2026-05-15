@@ -21,7 +21,7 @@ public class BookingDTO {
 
     private Set<Long> serviceIds;
 
-    private Long totalPrice;
+    private int totalPrice;
 
     private BookingStatus status =  BookingStatus.PENDING;
 }
