@@ -2,6 +2,7 @@ package com.devsaif.payment.service.controller;
 
 
 import com.devsaif.payment.service.domain.PaymentMethod;
+import com.devsaif.payment.service.model.PaymentOrder;
 import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
@@ -31,6 +32,14 @@ public class PaymentController {
         PaymentLinkResponse  response = paymentService.createOrder(userDTO, bookingDTO, paymentMethode);
 
         return ResponseEntity.ok(response);
+    }
 
+    @GetMapping("/{paymentOrderId}")
+    public ResponseEntity<PaymentOrder> getPaymentOrderById(
+            @PathVariable Long paymentOrderId
+    ) throws Exception {
+
+        PaymentOrder paymentOrder = paymentService.gePaymentOrderById(paymentOrderId);
+        return ResponseEntity.ok(paymentOrder);
     }
 }
