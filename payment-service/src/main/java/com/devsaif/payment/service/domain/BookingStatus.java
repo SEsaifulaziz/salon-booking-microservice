@@ -1,4 +1,4 @@
-package com.devsaif.booking.service.domain;
+package com.devsaif.payment.service.domain;
 
 public enum BookingStatus {
     PENDING,
