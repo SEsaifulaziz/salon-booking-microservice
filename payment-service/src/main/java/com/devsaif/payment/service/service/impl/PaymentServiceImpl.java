@@ -121,4 +121,9 @@ public class PaymentServiceImpl implements PaymentService {
 
         return session.getUrl();
     }
+
+    @Override
+    public Boolean proceedPayment(PaymentOrder paymentOrder, String paymentId, String paymentLinkId) {
+        return null;
+    }
 }
