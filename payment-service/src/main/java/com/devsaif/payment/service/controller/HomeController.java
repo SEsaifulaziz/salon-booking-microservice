@@ -1,4 +1,4 @@
-package com.devsaif.category.service.controller;
+package com.devsaif.payment.service.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping
     public String HomeControllerHandler(){
-        return "category microservice for salon booking system ";
+        return "payment microservice for salon booking system ";
     }
 }
