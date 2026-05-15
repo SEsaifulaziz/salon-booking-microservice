@@ -126,7 +126,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Boolean proceedPayment(PaymentOrder paymentOrder,
                                   String paymentId,
-                                  String paymentLinkId) {
+                                  String paymentLinkId) throws StripeException {
 
         if(paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)){
             if(paymentOrder.getPaymentMethod().equals(PaymentMethod.JAZZCASH)){
