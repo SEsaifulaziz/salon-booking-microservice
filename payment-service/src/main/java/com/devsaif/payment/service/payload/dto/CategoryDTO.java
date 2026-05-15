@@ -1,4 +1,4 @@
-package com.devsaif.booking.service.dto;
+package com.devsaif.payment.service.payload.dto;
 
 import lombok.Data;
 
