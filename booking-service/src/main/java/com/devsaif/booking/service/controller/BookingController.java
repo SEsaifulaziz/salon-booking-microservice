@@ -4,6 +4,7 @@ import com.devsaif.booking.service.domain.BookingStatus;
 import com.devsaif.booking.service.dto.*;
 import com.devsaif.booking.service.mapper.BookingMapper;
 import com.devsaif.booking.service.model.Booking;
+import com.devsaif.booking.service.model.SalonReport;
 import com.devsaif.booking.service.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -90,7 +91,9 @@ public class BookingController {
     }
 
     @GetMapping("/slot/salon/{salonId}/date/{date}")
-    public ResponseEntity<List<SlotDto>> getBookedSlot(@PathVariable Long salonId, @PathVariable @RequestParam LocalDate date) throws Exception {
+    public ResponseEntity<List<SlotDto>> getBookedSlot(
+            @PathVariable Long salonId,
+            @PathVariable @RequestParam(required = false) LocalDate date) throws Exception {
 
         List<Booking> bookings = bookingService.getBookingsByDate(date, salonId);
 
@@ -103,6 +106,15 @@ public class BookingController {
                 }).collect(Collectors.toList());
 
         return ResponseEntity.ok(slotDTOs);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<SalonReport> getBookingsReport(
+
+    ) throws Exception {
+        SalonReport salonReport = bookingService.getSalonReport(1L);
+
+        return  ResponseEntity.ok(salonReport);
     }
 
 
