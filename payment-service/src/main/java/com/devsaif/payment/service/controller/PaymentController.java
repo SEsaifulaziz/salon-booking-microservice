@@ -42,4 +42,18 @@ public class PaymentController {
         PaymentOrder paymentOrder = paymentService.gePaymentOrderById(paymentOrderId);
         return ResponseEntity.ok(paymentOrder);
     }
+
+    @PatchMapping("/proceed")
+    public ResponseEntity<Boolean> proceedPayment(
+            @RequestParam String paymentId,
+            @RequestParam String paymentLinkId
+    ) throws StripeException {
+        PaymentOrder paymentOrder = paymentService.getPaymentByPaymentId(paymentId);
+
+        Boolean response = paymentService.proceedPayment(paymentOrder,
+                paymentId,
+                paymentLinkId);
+
+        return ResponseEntity.ok(response);
+    }
 }
