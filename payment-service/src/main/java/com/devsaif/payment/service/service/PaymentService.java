@@ -5,13 +5,14 @@ import com.devsaif.payment.service.model.PaymentOrder;
 import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
+import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentLink;
 
 public interface PaymentService {
 
     PaymentLinkResponse createOrder(UserDTO userDTO,
                                     BookingDTO bookingDTO,
-                                    PaymentMethod paymentMethod);
+                                    PaymentMethod paymentMethod) throws StripeException;
 
     PaymentOrder gePaymentOrderById(Long id) throws Exception;
 
@@ -23,7 +24,7 @@ public interface PaymentService {
 
     String createStripePaymentLink(UserDTO userDTO,
                                    Long amount,
-                                   Long orderId);
+                                   Long orderId) throws StripeException;
 
 
 }
