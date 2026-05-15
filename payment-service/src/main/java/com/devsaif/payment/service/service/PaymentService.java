@@ -28,6 +28,6 @@ public interface PaymentService {
 
     Boolean proceedPayment(PaymentOrder paymentOrder,
                            String paymentId,
-                           String paymentLinkId);
+                           String paymentLinkId) throws StripeException;
 
 }
