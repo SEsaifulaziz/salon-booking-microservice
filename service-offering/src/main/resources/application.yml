@@ -1,0 +1,19 @@
+
+server:
+  port: 5004
+spring:
+  application:
+    name: service-offering
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/serviceOffering_db
+    username: root
+    password: topik712
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+spring.jpa.show-sql: true
+
+
