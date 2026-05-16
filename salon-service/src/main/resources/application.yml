@@ -1,0 +1,14 @@
+
+server:
+  port: 5002
+spring:
+  application:
+    name: salon-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/salon_db
+    username: root
+    password: topik712
+    driver-class-name: com.mysql.cj.jdbc.Driver
