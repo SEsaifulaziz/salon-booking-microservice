@@ -1,0 +1,17 @@
+server:
+  port: 5005
+spring:
+  application:
+    name: booking-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookings_db
+    username: username=root
+    password: topik712
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+spring.jpa.show-sql: true
