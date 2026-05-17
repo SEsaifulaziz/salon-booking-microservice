@@ -8,7 +8,7 @@ spring:
      hibernate:
        ddl-auto: update
   datasource:
-     url: jdbc:mysql://localhost:3306/category_db
+     url: jdbc:mysql://localhost:3306/category_db?createDatabaseIfNotExist=true
      username: root
      password: topik712
      driver-class-name: com.mysql.cj.jdbc.Driver
