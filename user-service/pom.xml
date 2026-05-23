@@ -100,6 +100,17 @@
 	<build>
 		<plugins>
 
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<to>
+						<image>saifulaziz712/salon-user:v1</image>
+					</to>
+				</configuration>
+			</plugin>
+
 			<!-- Spring Boot Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-261.23567.138">
+  <component name="dataSourceStorageLocal" created-in="IU-261.24374.151">
     <data-source name="salon_db@localhost" uuid="d7f63dcc-6a63-4e6c-8bb9-5d59e0ef39d4">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
       <user-name>root</user-name>
