@@ -1,0 +1,25 @@
+services:
+  eurekaserver:
+    image: "saifulaziz712/salon-eureka-server"
+    container_name: eurekaserver
+
+    ports:
+      - "8070:8070"
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent eurekaserver:8070/actuator/health/readiness | grep UP || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - devsaif
+
+networks:
+  devsaif:
+    driver: "bridge"
