@@ -44,7 +44,7 @@ services:
     ports:
       - "5001:5001"
     healthcheck:
-      test: [ "curl --fail --silent user:5001/actuator/health/readiness | grep UP || exit 1" ]
+      test: "curl --fail --silent user:5001/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 10s
       retries: 5
