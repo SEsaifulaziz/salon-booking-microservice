@@ -50,6 +50,9 @@ services:
       retries: 5
       start_period: 20s
     container_name: user
+    depends_on:
+      userdb:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "user-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://userdb:3306/userdb"
