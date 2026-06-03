@@ -142,14 +142,14 @@ services:
     ports:
       - "5003:5003"
     healthcheck:
-      test: "curl --fail --silent category:5005/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent category:5006/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 10s
       retries: 5
       start_period: 20s
-    container_name: booking
+    container_name: category
     depends_on:
-      categorydb:
+      userdb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "category-service"
@@ -164,6 +164,37 @@ services:
           memory: 700m
     networks:
       - devsaif
+
+
+  #payment service configuration
+  payment:
+    image: "saifulaziz712/salon-payment:v1"
+    ports:
+      - "5006:5006"
+    healthcheck:
+      test: "curl --fail --silent payment:5006/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    container_name: payment
+    depends_on:
+      userdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "payment-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://paymentdb:3306/paymentdb"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - devsaif
+
 
 networks:
   devsaif:
