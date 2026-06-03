@@ -309,6 +309,29 @@ services:
     networks:
       - devsaif
 
+  #gateway-server configuration
+  gateway-server:
+    image: "saifulaziz712/salon-gateway-server:v1"
+    ports:
+      - "5000:5000"
+    healthcheck:
+      test: "curl --fail --silent gateway-server:5004/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    container_name: gateway-server
+
+    environment:
+      SPRING_APPLICATION_NAME: "gateway-server"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - devsaif
 
 
 networks:
