@@ -19,7 +19,7 @@ services:
       - devsaif
 
 
-  # DB config for userdb
+  # DB config for booking
   bookingdb:
     image: mysql
     container_name: bookingdb
@@ -37,6 +37,23 @@ services:
     networks:
       - devsaif
 
+  # DB config for booking
+  categorydb:
+    image: mysql
+    container_name: categorydb
+    ports:
+      - 3302:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: categorydb
+    networks:
+      - devsaif
 
   #eureka server configuration
   eurekaserver:
@@ -119,6 +136,34 @@ services:
       - devsaif
 
 
+  #category service configuration
+  category:
+    image: "saifulaziz712/salon-category:v1"
+    ports:
+      - "5003:5003"
+    healthcheck:
+      test: "curl --fail --silent category:5005/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    container_name: booking
+    depends_on:
+      categorydb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "category-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://categorydb:3306/categorydb"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - devsaif
 
 networks:
   devsaif:
