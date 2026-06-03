@@ -142,7 +142,7 @@ services:
     ports:
       - "5003:5003"
     healthcheck:
-      test: "curl --fail --silent category:5006/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent category:5003/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 10s
       retries: 5
@@ -208,7 +208,7 @@ services:
       start_period: 20s
     container_name: salon
     depends_on:
-      categorydb:
+      userdb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "salon-service"
@@ -222,7 +222,37 @@ services:
         limits:
           memory: 700m
     networks:
-      - devsaifsalon
+      - devsaif
+
+  #service-offering service configuration
+  service-offering:
+    image: "saifulaziz712/salon-service-offering:v1"
+    ports:
+      - "5004:5004"
+    healthcheck:
+      test: "curl --fail --silent service-offering:5004/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    container_name: service-offering
+    depends_on:
+      userdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "service-offering-service"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://service-offeringdb:3306/service-offeringdb"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - devsaif
+
 
 
 networks:
