@@ -37,7 +37,7 @@ services:
     networks:
       - devsaif
 
-  # DB config for booking
+  # DB config for category
   categorydb:
     image: mysql
     container_name: categorydb
@@ -54,6 +54,25 @@ services:
       MYSQL_DATABASE: categorydb
     networks:
       - devsaif
+
+  # DB config for payment
+  paymentdb:
+    image: mysql
+    container_name: paymentdb
+    ports:
+      - 3302:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: paymentdb
+    networks:
+      - devsaif
+
 
   #eureka server configuration
   eurekaserver:
