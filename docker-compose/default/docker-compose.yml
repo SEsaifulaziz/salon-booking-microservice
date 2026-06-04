@@ -146,7 +146,7 @@ services:
     container_name: user
     depends_on:
       userdb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "user-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://userdb:3306/userdb"
@@ -176,7 +176,7 @@ services:
     container_name: booking
     depends_on:
       bookingdb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "booking-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://bookingdb:3306/bookingdb"
@@ -206,7 +206,7 @@ services:
     container_name: category
     depends_on:
       categorydb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "category-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://categorydb:3306/categorydb"
@@ -236,7 +236,7 @@ services:
     container_name: payment
     depends_on:
       paymentdb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "payment-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://paymentdb:3306/paymentdb"
@@ -265,7 +265,7 @@ services:
     container_name: salon
     depends_on:
       salondb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "salon-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://salondb:3306/salondb"
@@ -294,7 +294,7 @@ services:
     container_name: service-offering
     depends_on:
       service-offeringdb:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "service-offering-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://service-offeringdb:3306/service-offeringdb"
@@ -323,7 +323,7 @@ services:
     container_name: gateway-server
     depends_on:
       eurekaserver:
-        condition: service_started
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gateway-server"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
