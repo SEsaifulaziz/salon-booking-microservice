@@ -9,9 +9,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userdb
@@ -28,9 +28,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookingdb
@@ -46,9 +46,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: categorydb
@@ -64,9 +64,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: paymentdb
@@ -82,9 +82,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: salondb
@@ -101,9 +101,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: service-offeringdb
@@ -119,9 +119,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "curl --fail --silent eurekaserver:8070/actuator/health/readiness | grep UP || exit 1"]
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: eurekaserver
 
     deploy:
@@ -140,9 +140,9 @@ services:
     healthcheck:
       test: "curl --fail --silent user:5001/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: user
     depends_on:
       userdb:
@@ -170,9 +170,9 @@ services:
     healthcheck:
       test: "curl --fail --silent booking:5005/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: booking
     depends_on:
       bookingdb:
@@ -200,9 +200,9 @@ services:
     healthcheck:
       test: "curl --fail --silent category:5003/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: category
     depends_on:
       categorydb:
@@ -230,9 +230,9 @@ services:
     healthcheck:
       test: "curl --fail --silent payment:5006/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: payment
     depends_on:
       paymentdb:
@@ -259,9 +259,9 @@ services:
     healthcheck:
       test: "curl --fail --silent salon:5002/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: salon
     depends_on:
       salondb:
@@ -288,9 +288,9 @@ services:
     healthcheck:
       test: "curl --fail --silent service-offering:5004/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: service-offering
     depends_on:
       service-offeringdb:
@@ -317,9 +317,9 @@ services:
     healthcheck:
       test: "curl --fail --silent gateway-server:5004/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     container_name: gateway-server
 
     environment:
