@@ -8,10 +8,10 @@ services:
       - 3301:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userdb
@@ -27,10 +27,10 @@ services:
       - 3302:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookingdb
@@ -45,10 +45,10 @@ services:
       - 3303:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: categorydb
@@ -63,10 +63,10 @@ services:
       - 3304:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: paymentdb
@@ -81,10 +81,10 @@ services:
       - 3305:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: salondb
@@ -100,10 +100,10 @@ services:
       - 3307:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: service-offeringdb
@@ -121,7 +121,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 40s
     container_name: eurekaserver
 
     deploy:
@@ -315,13 +315,15 @@ services:
     ports:
       - "5000:5000"
     healthcheck:
-      test: "curl --fail --silent gateway-server:5004/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent gateway-server:5000/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 40s
     container_name: gateway-server
-
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gateway-server"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
