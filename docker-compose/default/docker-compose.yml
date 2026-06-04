@@ -4,6 +4,7 @@ services:
   userdb:
     image: mysql
     container_name: userdb
+    restart: unless-stopped
     ports:
       - 3301:3306
     healthcheck:
@@ -23,6 +24,7 @@ services:
   bookingdb:
     image: mysql
     container_name: bookingdb
+    restart: unless-stopped
     ports:
       - 3302:3306
     healthcheck:
@@ -41,6 +43,7 @@ services:
   categorydb:
     image: mysql
     container_name: categorydb
+    restart: unless-stopped
     ports:
       - 3303:3306
     healthcheck:
@@ -59,6 +62,7 @@ services:
   paymentdb:
     image: mysql
     container_name: paymentdb
+    restart: unless-stopped
     ports:
       - 3304:3306
     healthcheck:
@@ -77,6 +81,7 @@ services:
   salondb:
     image: mysql
     container_name: salondb
+    restart: unless-stopped
     ports:
       - 3305:3306
     healthcheck:
@@ -96,6 +101,7 @@ services:
   service-offeringdb:
     image: mysql
     container_name: service-offeringdb
+    restart: unless-stopped
     ports:
       - 3307:3306
     healthcheck:
@@ -123,6 +129,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: eurekaserver
+    restart: unless-stopped
 
     deploy:
       resources:
@@ -144,6 +151,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: user
+    restart: unless-stopped
     depends_on:
       userdb:
         condition: service_healthy
@@ -174,6 +182,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: booking
+    restart: unless-stopped
     depends_on:
       bookingdb:
         condition: service_healthy
@@ -204,6 +213,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: category
+    restart: unless-stopped
     depends_on:
       categorydb:
         condition: service_healthy
@@ -234,6 +244,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: payment
+    restart: unless-stopped
     depends_on:
       paymentdb:
         condition: service_healthy
@@ -263,6 +274,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: salon
+    restart: unless-stopped
     depends_on:
       salondb:
         condition: service_healthy
@@ -292,6 +304,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: service-offering
+    restart: unless-stopped
     depends_on:
       service-offeringdb:
         condition: service_healthy
@@ -321,6 +334,7 @@ services:
       retries: 30
       start_period: 60s
     container_name: gateway-server
+    restart: unless-stopped
     depends_on:
       eurekaserver:
         condition: service_healthy
