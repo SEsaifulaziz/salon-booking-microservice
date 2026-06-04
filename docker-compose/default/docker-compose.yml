@@ -97,7 +97,7 @@ services:
     image: mysql
     container_name: service-offeringdb
     ports:
-      - 3306:3306
+      - 3307:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -175,7 +175,7 @@ services:
       start_period: 20s
     container_name: booking
     depends_on:
-      userdb:
+      bookingdb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "booking-service"
@@ -205,7 +205,7 @@ services:
       start_period: 20s
     container_name: category
     depends_on:
-      userdb:
+      categorydb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "category-service"
@@ -235,7 +235,7 @@ services:
       start_period: 20s
     container_name: payment
     depends_on:
-      userdb:
+      paymentdb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "payment-service"
@@ -253,7 +253,7 @@ services:
 
   #salon service configuration
   salon:
-    image: "saifulaziz712/salon-category:v1"
+    image: "saifulaziz712/salon:v1"
     ports:
       - "5002:5002"
     healthcheck:
@@ -264,7 +264,7 @@ services:
       start_period: 20s
     container_name: salon
     depends_on:
-      userdb:
+      salondb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "salon-service"
@@ -293,7 +293,7 @@ services:
       start_period: 20s
     container_name: service-offering
     depends_on:
-      userdb:
+      service-offeringdb:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "service-offering-service"
