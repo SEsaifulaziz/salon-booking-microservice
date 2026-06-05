@@ -41,8 +41,8 @@ spring:
               predicates:
                 - Path=/salons/**,/api/salons/**,/api/admin/salons/**
 
-            - id: SERVICE-OFFERING
-              uri: lb://SERVICE-OFFERING
+            - id: SERVICE-OFFERING-SERVICE
+              uri: lb://SERVICE-OFFERING-SERVICE
               predicates:
                 - Path=/api/service-offering/**
 
