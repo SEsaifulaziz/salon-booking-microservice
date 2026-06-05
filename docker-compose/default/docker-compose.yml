@@ -122,12 +122,6 @@ services:
     image: "saifulaziz712/salon-eureka-server:v1"
     ports:
       - "8070:8070"
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail --silent eurekaserver:8070/actuator/health/readiness | grep UP || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: eurekaserver
     restart: unless-stopped
 
@@ -144,17 +138,11 @@ services:
     image: "saifulaziz712/salon-user:v1"
     ports:
       - "5001:5001"
-    healthcheck:
-      test: "curl --fail --silent user:5001/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: user
     restart: unless-stopped
     depends_on:
       userdb:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "user-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://userdb:3306/userdb"
@@ -175,17 +163,11 @@ services:
     image: "saifulaziz712/salon-booking:v1"
     ports:
       - "5005:5005"
-    healthcheck:
-      test: "curl --fail --silent booking:5005/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: booking
     restart: unless-stopped
     depends_on:
       bookingdb:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "booking-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://bookingdb:3306/bookingdb"
@@ -206,17 +188,11 @@ services:
     image: "saifulaziz712/salon-category:v1"
     ports:
       - "5003:5003"
-    healthcheck:
-      test: "curl --fail --silent category:5003/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: category
     restart: unless-stopped
     depends_on:
       categorydb:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "category-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://categorydb:3306/categorydb"
@@ -237,17 +213,11 @@ services:
     image: "saifulaziz712/salon-payment:v1"
     ports:
       - "5006:5006"
-    healthcheck:
-      test: "curl --fail --silent payment:5006/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: payment
     restart: unless-stopped
     depends_on:
       paymentdb:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "payment-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://paymentdb:3306/paymentdb"
@@ -267,17 +237,11 @@ services:
     image: "saifulaziz712/salon:v1"
     ports:
       - "5002:5002"
-    healthcheck:
-      test: "curl --fail --silent salon:5002/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: salon
     restart: unless-stopped
     depends_on:
       salondb:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "salon-service"
       SPRING_DATASOURCE_URL: "jdbc:mysql://salondb:3306/salondb"
@@ -297,19 +261,13 @@ services:
     image: "saifulaziz712/salon-service-offering:v1"
     ports:
       - "5004:5004"
-    healthcheck:
-      test: "curl --fail --silent service-offering:5004/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: service-offering
     restart: unless-stopped
     depends_on:
       service-offeringdb:
-        condition: service_healthy
+        condition: service_started
     environment:
-      SPRING_APPLICATION_NAME: "service-offering-service"
+      SPRING_APPLICATION_NAME: "service-offering"
       SPRING_DATASOURCE_URL: "jdbc:mysql://service-offeringdb:3306/service-offeringdb"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
@@ -327,17 +285,11 @@ services:
     image: "saifulaziz712/salon-gateway-server:v1"
     ports:
       - "5000:5000"
-    healthcheck:
-      test: "curl --fail --silent gateway-server:5000/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 60s
     container_name: gateway-server
     restart: unless-stopped
     depends_on:
       eurekaserver:
-        condition: service_healthy
+        condition: service_started
     environment:
       SPRING_APPLICATION_NAME: "gateway-server"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
