@@ -2,6 +2,7 @@ package com.devsaif.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,8 @@ public class KeycloakService {
     private static final String username = "saifulaziz";
     private static final String password = "topik712";
     private static final String clientId  = "29047eb7-6229-4f3a-b614-3d6b6d1bdd49";
+
+    private final RestTemplate restTemplate;
 
 
 
