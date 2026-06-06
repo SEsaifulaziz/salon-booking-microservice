@@ -70,6 +70,9 @@ public class KeycloakService {
         return null;
     }
 
-
-
+    public KeycloakRole getRoleByName(String clientId,
+                                      String token,
+                                      String role){
+        return null;
+    }
 }
