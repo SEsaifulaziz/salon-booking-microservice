@@ -1,8 +1,13 @@
 package com.devsaif.service;
 
+import com.devsaif.payload.response.dto.CredentialDTO;
+import com.devsaif.payload.response.dto.SignupDTO;
+import com.devsaif.payload.response.dto.UserRequestDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +27,41 @@ public class KeycloakService {
     private static final String clientId  = "29047eb7-6229-4f3a-b614-3d6b6d1bdd49";
 
     private final RestTemplate restTemplate;
+
+
+    public void createUser(SignupDTO signupDTO) throws Exception {
+
+        String ACCESS_TOKEN = "";
+
+        CredentialDTO credentialDTO = new CredentialDTO();
+        credentialDTO.setTemporary(false);
+        credentialDTO.setType("password");
+        credentialDTO.setValue(signupDTO.getPassword());
+
+        UserRequestDTO userRequestDTO = new UserRequestDTO();
+        userRequestDTO.setUsername(signupDTO.getUsername());
+        userRequestDTO.setEmail(signupDTO.getEmail());
+        userRequestDTO.setEnabled(true);
+        userRequestDTO.setFirstName(signupDTO.getFirstName());
+        userRequestDTO.setLastName(signupDTO.getLastName());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(ACCESS_TOKEN);
+
+        HttpEntity<UserRequestDTO> requestDTOEntity = new HttpEntity<>(userRequestDTO, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                KEYCLOAK_ADMIN_API,
+                HttpMethod.POST,
+                requestDTOEntity,
+                String.class
+        );
+
+        if(response.getStatusCode() == HttpStatus.CREATED){
+            System.out.println("user created successfully");
+        }
+    }
 
 
 
