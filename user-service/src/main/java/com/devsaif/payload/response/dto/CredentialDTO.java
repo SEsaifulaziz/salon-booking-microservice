@@ -6,5 +6,5 @@ import lombok.Data;
 public class CredentialDTO {
     private String type;
     private String value;
-    private String temporary;
+    private Boolean temporary;
 }
