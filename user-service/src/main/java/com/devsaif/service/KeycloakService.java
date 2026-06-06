@@ -65,7 +65,7 @@ public class KeycloakService {
 
     public TokenResponse getAdminAccessToken(String username,
                                             String password,
-                                            String grantType,q
+                                            String grantType,
                                             String refreshToken) {
         return null;
     }
@@ -75,4 +75,9 @@ public class KeycloakService {
                                       String role){
         return null;
     }
+
+    public KeycloakUserDTO fetchFirstUserByName(String username, String token){
+        return null;
+    }
+
 }
