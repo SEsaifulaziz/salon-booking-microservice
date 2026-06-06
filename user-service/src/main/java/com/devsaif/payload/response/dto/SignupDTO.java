@@ -1,5 +1,8 @@
 package com.devsaif.payload.response.dto;
 
+import lombok.Data;
+
+@Data
 public class SignupDTO {
 
     private String firstName;
