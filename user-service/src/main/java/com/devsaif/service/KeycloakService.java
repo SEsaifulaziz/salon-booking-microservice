@@ -63,6 +63,13 @@ public class KeycloakService {
         }
     }
 
+    public TokenResponse getAdminAccessToken(String username,
+                                            String password,
+                                            String grantType,q
+                                            String refreshToken) {
+        return null;
+    }
+
 
 
 }
