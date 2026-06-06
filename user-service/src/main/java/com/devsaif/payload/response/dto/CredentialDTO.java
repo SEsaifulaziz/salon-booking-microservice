@@ -1,4 +1,10 @@
 package com.devsaif.payload.response.dto;
 
+import lombok.Data;
+
+@Data
 public class CredentialDTO {
+    private String type;
+    private String value;
+    private String temporary;
 }
