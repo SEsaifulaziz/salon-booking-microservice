@@ -6,6 +6,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +32,13 @@ public class KeycloakService {
 
     public void createUser(SignupDTO signupDTO) throws Exception {
 
-        String ACCESS_TOKEN = "";
+        String ACCESS_TOKEN = getAdminAccessToken(
+                username,
+                password,
+                GRANT_TYPE,
+                null
+
+        ).getAccessToken();
 
         CredentialDTO credentialDTO = new CredentialDTO();
         credentialDTO.setTemporary(false);
@@ -60,7 +67,28 @@ public class KeycloakService {
 
         if(response.getStatusCode() == HttpStatus.CREATED){
             System.out.println("user created successfully");
+
+            KeycloakUserDTO user = fetchFirstUserByName(signupDTO.getUsername(), ACCESS_TOKEN);
+
+            KeycloakRole keycloakRole = getRoleByName(clientId,
+                    ACCESS_TOKEN,
+                    signupDTO.getRole().toString());
+
+            List<KeycloakRole> roles = new ArrayList<>();
+            roles.add(keycloakRole);
+
+            assignRoleToUser(
+                    user.getId(),
+                    clientId,
+                    roles,
+                    ACCESS_TOKEN
+            );
+        }else {
+            System.out.println("user creation failed");
+            throw new Exception(response.getBody());
         }
+
+
     }
 
     public TokenResponse getAdminAccessToken(String username,
@@ -84,6 +112,5 @@ public class KeycloakService {
                                  String clientId,
                                  List<KeycloakRole> roles,
                                  String token){
-
     }
 }
