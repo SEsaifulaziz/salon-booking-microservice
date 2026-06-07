@@ -129,8 +129,28 @@ public class KeycloakService {
 
     public KeycloakRole getRoleByName(String clientId,
                                       String token,
-                                      String role){
-        return null;
+                                      String role) throws Exception {
+
+        String url = KEYCLOAK_BASE_URL + "/admin/realms/master/clients/" + clientId + "/roles/" + role;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        headers.setBearerAuth(token);
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<KeycloakRole> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                requestEntity,
+                KeycloakRole.class
+        );
+
+        if(response.getBody() != null){
+            return response.getBody();
+        }
+        throw new Exception("Failed to fetch client role: " + role);
+
     }
 
     public KeycloakUserDTO fetchFirstUserByName(String username, String token){
