@@ -1,4 +1,4 @@
-package com.devsaif.payload.response.dto;
+package com.devsaif.payload.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

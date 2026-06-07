@@ -1,4 +1,4 @@
-package com.devsaif.payload.response.dto;
+package com.devsaif.payload.dto;
 
 import com.devsaif.domain.UserRole;
 import lombok.Data;

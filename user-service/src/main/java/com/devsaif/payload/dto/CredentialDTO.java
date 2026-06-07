@@ -1,4 +1,4 @@
-package com.devsaif.payload.response.dto;
+package com.devsaif.payload.dto;
 
 import lombok.Data;
 
