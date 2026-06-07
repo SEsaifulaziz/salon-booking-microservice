@@ -164,7 +164,7 @@ public class KeycloakService {
                 KeycloakUserDTO[].class
         );
         KeycloakUserDTO[] users = response.getBody();
-        if(users !=null && users.length > 0){
+        if (users != null && users.length > 0) {
             return users[0];
         }
         throw new Exception("user not found with username" + username);
@@ -174,7 +174,26 @@ public class KeycloakService {
     public void assignRoleToUser(String userId,
                                  String clientId,
                                  List<KeycloakRole> roles,
-                                 String token) {
+                                 String token) throws Exception {
+
+        String url = KEYCLOAK_BASE_URL + "/admin/realms/master/users/" + userId + "/role-mappings/clients/" + clientId;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity<List<KeycloakRole>> requestEntity = new HttpEntity<>(roles, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+        } catch (Exception ex) {
+            throw new Exception("Failed to assign new role" + ex.getMessage());
+        }
 
     }
 }
