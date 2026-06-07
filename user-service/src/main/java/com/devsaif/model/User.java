@@ -1,6 +1,7 @@
 package com.devsaif.model;
 
 
+import com.devsaif.domain.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class User {
     private String phone;
 
     @NotBlank(message = "role is mandatory")
-    private String role;
+    private UserRole role;
 
     @NotBlank(message = "password is mandatory")
     private String password;
