@@ -4,6 +4,8 @@ import com.devsaif.payload.response.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -94,8 +96,35 @@ public class KeycloakService {
     public TokenResponse getAdminAccessToken(String username,
                                             String password,
                                             String grantType,
-                                            String refreshToken) {
-        return new TokenResponse();
+                                            String refreshToken) throws Exception {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+
+        requestBody.add("grant_type", grantType);
+        requestBody.add("refresh_token", refreshToken);
+        requestBody.add("username", username);
+        requestBody.add("password", password);
+        requestBody.add("client_id", CLIENT_ID);
+        requestBody.add("client_secret", CLIENT_SECRET);
+        requestBody.add("scope", scope);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        ResponseEntity<TokenResponse> response = restTemplate.exchange(
+                TOKEN_URL,
+                HttpMethod.POST,
+                requestEntity,
+                TokenResponse.class
+        );
+
+        if(response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
+            return response.getBody();
+        } else {
+            throw new Exception("Failed to obtain access token");
+        }
     }
 
     public KeycloakRole getRoleByName(String clientId,
