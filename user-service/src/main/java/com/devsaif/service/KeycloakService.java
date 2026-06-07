@@ -27,7 +27,7 @@ public class KeycloakService {
     private static final String scope = "openid profile email";
     private static final String username = "saifulaziz";
     private static final String password = "topik712";
-    private static final String clientId  = "29047eb7-6229-4f3a-b614-3d6b6d1bdd49";
+    private static final String clientId = "29047eb7-6229-4f3a-b614-3d6b6d1bdd49";
 
     private final RestTemplate restTemplate;
 
@@ -67,7 +67,7 @@ public class KeycloakService {
                 String.class
         );
 
-        if(response.getStatusCode() == HttpStatus.CREATED){
+        if (response.getStatusCode() == HttpStatus.CREATED) {
             System.out.println("user created successfully");
 
             KeycloakUserDTO user = fetchFirstUserByName(signupDTO.getUsername(), ACCESS_TOKEN);
@@ -85,7 +85,7 @@ public class KeycloakService {
                     roles,
                     ACCESS_TOKEN
             );
-        }else {
+        } else {
             System.out.println("user creation failed");
             throw new Exception(response.getBody());
         }
@@ -94,9 +94,9 @@ public class KeycloakService {
     }
 
     public TokenResponse getAdminAccessToken(String username,
-                                            String password,
-                                            String grantType,
-                                            String refreshToken) throws Exception {
+                                             String password,
+                                             String grantType,
+                                             String refreshToken) throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -120,7 +120,7 @@ public class KeycloakService {
                 TokenResponse.class
         );
 
-        if(response.getStatusCode() == HttpStatus.OK && response.getBody() != null){
+        if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             return response.getBody();
         } else {
             throw new Exception("Failed to obtain access token");
@@ -129,7 +129,7 @@ public class KeycloakService {
 
     public KeycloakRole getRoleByName(String clientId,
                                       String token,
-                                      String role) throws Exception {
+                                      String role) {
 
         String url = KEYCLOAK_BASE_URL + "/admin/realms/master/clients/" + clientId + "/roles/" + role;
 
@@ -145,21 +145,36 @@ public class KeycloakService {
                 requestEntity,
                 KeycloakRole.class
         );
-
-        if(response.getBody() != null){
-            return response.getBody();
-        }
-        throw new Exception("Failed to fetch client role: " + role);
-
+        return response.getBody();
     }
 
-    public KeycloakUserDTO fetchFirstUserByName(String username, String token){
-        return null;
+    public KeycloakUserDTO fetchFirstUserByName(String username, String token) throws Exception {
+
+        String url = KEYCLOAK_BASE_URL + "/admin/realms/master/users?username=" + username;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<KeycloakUserDTO[]> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                requestEntity,
+                KeycloakUserDTO[].class
+        );
+        KeycloakUserDTO[] users = response.getBody();
+        if(users !=null && users.length > 0){
+            return users[0];
+        }
+        throw new Exception("user not found with username" + username);
+
     }
 
     public void assignRoleToUser(String userId,
                                  String clientId,
                                  List<KeycloakRole> roles,
-                                 String token){
+                                 String token) {
+
     }
 }
