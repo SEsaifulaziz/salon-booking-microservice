@@ -1,12 +1,12 @@
 package com.devsaif.service;
 
-import com.devsaif.payload.response.dto.CredentialDTO;
-import com.devsaif.payload.response.dto.SignupDTO;
-import com.devsaif.payload.response.dto.UserRequestDTO;
+import com.devsaif.payload.response.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 
 @Service
@@ -67,7 +67,7 @@ public class KeycloakService {
                                             String password,
                                             String grantType,
                                             String refreshToken) {
-        return null;
+        return new TokenResponse();
     }
 
     public KeycloakRole getRoleByName(String clientId,
@@ -80,4 +80,10 @@ public class KeycloakService {
         return null;
     }
 
+    public void assignRoleToUser(String userId,
+                                 String clientId,
+                                 List<KeycloakRole> roles,
+                                 String token){
+
+    }
 }
