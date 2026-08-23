@@ -4,12 +4,11 @@ import com.devsaif.payload.dto.LoginDTO;
 import com.devsaif.payload.dto.SignupDTO;
 import com.devsaif.payload.response.AuthResponse;
 import com.devsaif.service.AuthService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController()
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
@@ -28,7 +27,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(
             @RequestBody LoginDTO req ) throws Exception {
 
-        AuthResponse authResponse = authService.login(req.getUsername(), req.getPassword());
+        AuthResponse authResponse = authService.login(req.getEmail(), req.getPassword());
         return ResponseEntity.ok(authResponse);
     }
 
