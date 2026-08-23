@@ -20,15 +20,15 @@ public class KeycloakService {
     private static final String KEYCLOAK_BASE_URL = "http://localhost:8080";
     private static final String KEYCLOAK_ADMIN_API = KEYCLOAK_BASE_URL + "/admin/realms/master/users";
 
-    private static final String TOKEN_URL = KEYCLOAK_BASE_URL + "realms/master/protocol/openid-connect/token";
+    private static final String TOKEN_URL = KEYCLOAK_BASE_URL + "/realms/master/protocol/openid-connect/token";
 
     private static final String CLIENT_ID = "salon-booking-client";
-    private static final String CLIENT_SECRET = "PnA7UBHoUmP5mK7u7UKhA2zaw8j7FL14";
+    private static final String CLIENT_SECRET = "MgV4eA7v4AvGVIE1yMmSiwZYcLZOBZKNLmEezL1JsUKF95IaJdLHsgYZZoZl2VeEaMG9ZVPQQx5gtedRxiTdL8";
     private static final String GRANT_TYPE = "password";
     private static final String scope = "openid profile email";
     private static final String username = "saifulaziz";
     private static final String password = "topik712";
-    private static final String clientId = "29047eb7-6229-4f3a-b614-3d6b6d1bdd49";
+    private static final String clientId = "71e4b827-082b-4006-a4b2-667df1524da9";
 
     private final RestTemplate restTemplate;
 
@@ -54,6 +54,7 @@ public class KeycloakService {
         userRequestDTO.setEnabled(true);
         userRequestDTO.setFirstName(signupDTO.getFirstName());
         userRequestDTO.setLastName(signupDTO.getLastName());
+        userRequestDTO.getCredentials().add(credentialDTO);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -172,16 +173,18 @@ public class KeycloakService {
 
     }
 
-    public void assignRoleToUser(String userId,
+    public void assignRoleToUser(
+            String userId,
                                  String clientId,
                                  List<KeycloakRole> roles,
-                                 String token) throws Exception {
+                                 String token
+    ) throws Exception {
 
         String url = KEYCLOAK_BASE_URL + "/admin/realms/master/users/" + userId + "/role-mappings/clients/" + clientId;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<List<KeycloakRole>> requestEntity = new HttpEntity<>(roles, headers);
 
