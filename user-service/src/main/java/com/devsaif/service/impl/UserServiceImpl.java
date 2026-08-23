@@ -2,8 +2,11 @@ package com.devsaif.service.impl;
 
 import com.devsaif.exception.UserException;
 import com.devsaif.model.User;
+import com.devsaif.payload.dto.KeycloakUserDTO;
 import com.devsaif.repository.UserRepository;
+import com.devsaif.service.KeycloakService;
 import com.devsaif.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
+    private final KeycloakService  keycloakService;
 
     @Override
     public User createUser(User user) {
@@ -67,5 +71,12 @@ public class UserServiceImpl implements UserService {
         existingUser.setRole(user.getRole());
 
         return userRepo.save(existingUser);
+    }
+
+    @Override
+    public User getUserFromJwt(String jwt) throws Exception {
+        KeycloakUserDTO userDTO = keycloakService.fetchUserProfileByJwt(jwt);
+
+        return userRepo.findByEmail(userDTO.getEmail());
     }
 }
