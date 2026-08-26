@@ -1,4 +1,55 @@
 package com.devsaif.gateway.server.config;
 
-public class Security {
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import reactor.core.publisher.Mono;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
+        http
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .authorizeExchange(
+                        exchanges -> exchanges
+                                .pathMatchers("/auth/**").permitAll()
+                                .pathMatchers("/api/notifications/ws/**").permitAll()
+                                .pathMatchers(
+                                        "/api/catagories/salon-owner/**",
+                                        "/api/notifications/salon-owner/**",
+                                        "/api/service-offering/salon-owner/**")
+                                .hasAnyRole("SALON_OWNER")
+                                .pathMatchers("/api/salons/**",
+                                        "/api/categories/**",
+                                        "/api/notifications/**",
+                                        "/api/bookings/**",
+                                        "/api/payments/**",
+                                        "/api/service-offering/**",
+                                        "/api/users/**",
+                                        "/api/reviews/**"
+                                )
+                                .hasAnyRole("CUSTOMER", "SALON_OWNER", "ADMIN")
+
+                ).oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
+                        .jwt(jwtSpec -> jwtSpec
+                                .jwtAuthenticationConverter(grantAuthoritiesExtractor())));
+        return http.build();
+
+    }
+
+    private Converter<Jwt,? extends Mono<? extends AbstractAuthenticationToken>> grantAuthoritiesExtractor() {
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(
+                new KeyCloakRoleConverter());
+        return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
+    }
 }
