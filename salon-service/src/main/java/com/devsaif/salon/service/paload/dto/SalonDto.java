@@ -3,6 +3,7 @@ package com.devsaif.salon.service.paload.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -24,8 +25,8 @@ public class SalonDto {
 
     private String city;
 
-    private LocalDateTime openingTime;
+    private LocalTime openingTime;
 
-    private LocalDateTime ClosingTime;
+    private LocalTime ClosingTime;
 
 }
