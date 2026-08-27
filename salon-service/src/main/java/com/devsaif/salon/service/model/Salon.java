@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -38,8 +39,8 @@ public class Salon {
     private Long ownerId;
 
     @Column(nullable = false)
-    private LocalDateTime openingTime;
+    private LocalTime openingTime;
 
     @Column(nullable = false)
-    private LocalDateTime ClosingTime;
+    private LocalTime ClosingTime;
 }
