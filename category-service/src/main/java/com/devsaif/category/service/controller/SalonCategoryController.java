@@ -3,6 +3,7 @@ package com.devsaif.category.service.controller;
 import com.devsaif.category.service.dto.SalonDto;
 import com.devsaif.category.service.model.Category;
 import com.devsaif.category.service.service.CategoryService;
+import com.devsaif.category.service.service.client.SalonFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,15 @@ import java.util.Set;
 public class SalonCategoryController {
 
     private final CategoryService categoryService;
+    private final SalonFeignClient salonFeignClient;
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) throws Exception{
-        SalonDto salonDto = new SalonDto();
-        salonDto.setId(1L);
+    public ResponseEntity<Category> createCategory(
+            @RequestBody Category category,
+            @RequestHeader("Authorization") String jwt
+
+    ) throws Exception{
+        SalonDto salonDto = salonFeignClient.getSalonByOwnerId(jwt).getBody();
 
         Category savedCategory = categoryService.createCategory(category,salonDto);
         return ResponseEntity.ok().body(savedCategory);
