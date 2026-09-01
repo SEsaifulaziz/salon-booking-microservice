@@ -82,8 +82,12 @@ public class SalonServiceImpl implements SalonService {
     }
 
     @Override
-    public Salon getSalonByOwnerId(Long ownerId) {
-        return salonRepo.findByOwnerId(ownerId);
+    public Salon getSalonByOwnerId(Long ownerId) throws Exception {
+        Salon salon =  salonRepo.findByOwnerId(ownerId);
+        if(salon == null){
+            throw new Exception("No salon found for this owner!");
+        }
+        return salon;
     }
 
     @Override
