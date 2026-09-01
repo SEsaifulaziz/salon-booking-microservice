@@ -32,7 +32,7 @@ public class SalonServiceOfferingController {
                 .getSalonByOwnerId(jwt).getBody();
 
         CategoryDTO categoryDTO = categoryFeignClient
-                .getCategoryById(serviceDTO.getCategoryId()).getBody();
+                .getCategoriesByIdAndSalon(serviceDTO.getCategoryId(), salonDTO.getId()).getBody();
 
         ServiceOffering serviceOfferings = serviceOfferingService
                 .createService(salonDTO, serviceDTO, categoryDTO);
