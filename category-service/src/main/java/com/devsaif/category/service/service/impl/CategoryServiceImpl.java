@@ -66,4 +66,13 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteAllCategories() {
         categoryRepo.deleteAll();
     }
+
+    @Override
+    public Category findByIdAndSalonId(Long id, Long salonId) throws Exception {
+        Category category = categoryRepo.findByIdAndSalonId(id,salonId);
+        if(category == null){
+            throw new Exception("Category not found!");
+        }
+        return category;
+    }
 }
