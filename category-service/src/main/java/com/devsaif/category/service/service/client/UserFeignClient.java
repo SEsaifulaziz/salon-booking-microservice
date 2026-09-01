@@ -1,6 +1,6 @@
-package com.devsaif.service.offering.service.client;
+package com.devsaif.category.service.service.client;
 
-import com.devsaif.service.offering.dto.UserDTO;
+import com.devsaif.category.service.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface UserFeignClient {
 
     @GetMapping("/api/users/{id}")
-    public ResponseEntity<UserDTO> getUserById(
+    public ResponseEntity<UserDto> getUserById(
             @PathVariable Long id
     ) throws Exception;
 
     @GetMapping("/api/users/profile")
-    public ResponseEntity<UserDTO> getUserProfile(
+    public ResponseEntity<UserDto> getUserProfile(
             @RequestHeader("Authorization") String jwt
     ) throws Exception;
 
