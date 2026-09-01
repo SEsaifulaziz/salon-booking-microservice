@@ -20,7 +20,7 @@ public interface SalonService {
 
     void DeleteById(Long id);
 
-    Salon getSalonByOwnerId(Long ownerId);
+    Salon getSalonByOwnerId(Long ownerId) throws  Exception;
 
     List<Salon> searchSalonByCityName(String cityName);
 
