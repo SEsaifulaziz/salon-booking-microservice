@@ -10,17 +10,10 @@ import com.devsaif.payment.service.repository.PaymentOrderRepository;
 import com.devsaif.payment.service.service.PaymentService;
 import com.devsaif.payment.service.service.provider.PaymentProvider;
 import com.devsaif.payment.service.service.provider.PaymentProviderFactory;
-import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
-import com.stripe.model.PaymentLink;
-
-import com.stripe.model.checkout.Session;
-import com.stripe.param.checkout.SessionCreateParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -127,27 +120,6 @@ public class PaymentServiceImpl implements PaymentService {
                 .orElse(null);
     }
 
-    @Override
-    public PaymentLink createJazzCashPaymentLink(
-            UserDTO user,
-            Long amount,
-            Long orderId
-    ) {
-        throw new UnsupportedOperationException(
-                "Use PaymentProviderFactory for payment creation"
-        );
-    }
-
-    @Override
-    public String createStripePaymentLink(
-            UserDTO userDTO,
-            Long amount,
-            Long orderId
-    ) {
-        throw new UnsupportedOperationException(
-                "user PaymentProviderFactory for payment creation"
-        );
-    }
 
     @Override
     public Boolean proceedPayment(
