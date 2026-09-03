@@ -4,8 +4,17 @@ import com.devsaif.payment.service.model.PaymentOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PaymentOrderRepository extends JpaRepository<PaymentOrder, Long> {
+import java.util.Optional;
 
-    PaymentOrder findByPaymentLinkId(String paymentLinkId);
+@Repository
+public interface PaymentOrderRepository
+        extends JpaRepository<PaymentOrder, Long> {
+
+    Optional<PaymentOrder> findByPaymentLinkId(String paymentLinkId);
+
+    Optional<PaymentOrder> findByProviderTransactionId(
+            String providerTransactionId
+    );
+
+    Optional<PaymentOrder> findByBookingId(Long bookingId);
 }
