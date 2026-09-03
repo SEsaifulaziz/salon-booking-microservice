@@ -19,10 +19,5 @@ public interface PaymentService {
 
     PaymentOrder getPaymentByPaymentId(String paymentId);
 
-    Boolean proceedPayment(
-            PaymentOrder paymentOrder,
-            String paymentId,
-            String paymentLinkId
-    );
 
 }
