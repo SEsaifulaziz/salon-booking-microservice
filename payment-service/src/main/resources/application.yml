@@ -21,7 +21,6 @@ stripe:
   api:
     key: "your stripe api key"
 
-
 eureka:
   instance:
     prefer-ip-address: true
@@ -30,3 +29,8 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8070/eureka/
+
+payment:
+  frontend:
+    success-url: "http://localhost:3000/payment-success"
+    cancel-url: "http://localhost:3000/payment/cancel"
