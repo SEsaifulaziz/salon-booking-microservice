@@ -12,13 +12,19 @@ public class PaymentProviderFactory {
     private final Map<PaymentMethod, PaymentProvider> providers;
 
     public PaymentProviderFactory(
-            StripePaymentProvider stripePaymentProvider
+            StripePaymentProvider stripePaymentProvider,
+            JazzCashPaymentProvider jazzCashPaymentProvider
     ) {
         this.providers = new EnumMap<>(PaymentMethod.class);
 
         providers.put(
                 PaymentMethod.STRIPE,
                 stripePaymentProvider
+        );
+
+        providers.put(
+                PaymentMethod.JAZZCASH,
+                jazzCashPaymentProvider
         );
     }
 
