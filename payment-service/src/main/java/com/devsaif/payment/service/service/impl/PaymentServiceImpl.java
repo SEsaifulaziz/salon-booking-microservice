@@ -45,7 +45,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         PaymentOrder paymentOrder = new PaymentOrder();
 
-        paymentOrder.setAmount((long) bookingDTO.getTotalPrice());
+        paymentOrder.setAmount((long)bookingDTO.getTotalPrice() * 100);
         paymentOrder.setCurrency("PKR");
         paymentOrder.setStatus(PaymentOrderStatus.CREATED);
         paymentOrder.setPaymentMethod(paymentMethod);
