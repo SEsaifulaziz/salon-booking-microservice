@@ -23,6 +23,7 @@ public class SecurityConfig {
                         exchanges -> exchanges
                                 .pathMatchers("/auth/**").permitAll()
                                 .pathMatchers("/api/notifications/ws/**").permitAll()
+                                .pathMatchers("/api/payment/webhook/stripe").permitAll()
                                 .pathMatchers(
                                         "/api/catagories/salon-owner/**",
                                         "/api/notifications/salon-owner/**",
