@@ -34,7 +34,7 @@ spring:
             - id: PAYMENT-SERVICE
               uri: lb://PAYMENT-SERVICE
               predicates:
-                - Path=/api/payments/**
+                - Path=/api/payment/**
 
             - id: SALON-SERVICE
               uri: lb://SALON-SERVICE
