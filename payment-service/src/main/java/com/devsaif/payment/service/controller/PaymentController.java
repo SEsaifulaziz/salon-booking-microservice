@@ -7,10 +7,11 @@ import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
 import com.devsaif.payment.service.service.PaymentService;
-import com.stripe.exception.StripeException;
+import com.devsaif.payment.service.service.client.UserFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/payment")
@@ -18,18 +19,22 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final PaymentService paymentService;
+    private final UserFeignClient userFeignClient;
+
 
     @PostMapping("/create")
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(
             @RequestBody BookingDTO bookingDTO,
-            @RequestParam PaymentMethod paymentMethode
-            ) throws StripeException {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setFullName("Saifulaziz");
-        userDTO.setEmail("saifulazizse@gmail.com");
-        userDTO.setId(1L);
+            @RequestParam PaymentMethod paymentMethode,
+            @RequestHeader("Authorization") String jwt
+            ) throws Exception {
+        UserDTO userDTO = userFeignClient.getUserProfile(jwt).getBody();
 
-        PaymentLinkResponse  response = paymentService.createOrder(userDTO, bookingDTO, paymentMethode);
+        PaymentLinkResponse  response = paymentService.createOrder(
+                userDTO,
+                bookingDTO,
+                paymentMethode
+        );
 
         return ResponseEntity.ok(response);
     }
@@ -39,21 +44,8 @@ public class PaymentController {
             @PathVariable Long paymentOrderId
     ) throws Exception {
 
-        PaymentOrder paymentOrder = paymentService.gePaymentOrderById(paymentOrderId);
+        PaymentOrder paymentOrder = paymentService.getPaymentOrderById(paymentOrderId);
         return ResponseEntity.ok(paymentOrder);
     }
 
-    @PatchMapping("/proceed")
-    public ResponseEntity<Boolean> proceedPayment(
-            @RequestParam String paymentId,
-            @RequestParam String paymentLinkId
-    ) throws StripeException {
-        PaymentOrder paymentOrder = paymentService.getPaymentByPaymentId(paymentLinkId);
-
-        Boolean response = paymentService.proceedPayment(paymentOrder,
-                paymentId,
-                paymentLinkId);
-
-        return ResponseEntity.ok(response);
-    }
 }
