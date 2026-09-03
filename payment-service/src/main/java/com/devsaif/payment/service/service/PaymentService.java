@@ -5,29 +5,24 @@ import com.devsaif.payment.service.model.PaymentOrder;
 import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
-import com.stripe.exception.StripeException;
-import com.stripe.model.PaymentLink;
+
 
 public interface PaymentService {
 
-    PaymentLinkResponse createOrder(UserDTO userDTO,
-                                    BookingDTO bookingDTO,
-                                    PaymentMethod paymentMethod) throws StripeException;
+    PaymentLinkResponse createOrder(
+            UserDTO userDTO,
+            BookingDTO bookingDTO,
+            PaymentMethod paymentMethod
+    ) throws Exception;
 
-    PaymentOrder gePaymentOrderById(Long id) throws Exception;
+    PaymentOrder getPaymentOrderById(Long id) throws Exception;
 
     PaymentOrder getPaymentByPaymentId(String paymentId);
 
-    PaymentLink createJazzCashPaymentLink(UserDTO user,
-                                          Long amount,
-                                          Long orderId);
-
-    String createStripePaymentLink(UserDTO userDTO,
-                                   Long amount,
-                                   Long orderId) throws StripeException;
-
-    Boolean proceedPayment(PaymentOrder paymentOrder,
-                           String paymentId,
-                           String paymentLinkId) throws StripeException;
+    Boolean proceedPayment(
+            PaymentOrder paymentOrder,
+            String paymentId,
+            String paymentLinkId
+    );
 
 }
