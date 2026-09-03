@@ -1,6 +1,6 @@
-package com.devsaif.payment.service.domain;
+package com.devsaif.booking.service.domain;
 
 public enum PaymentMethod {
     JAZZCASH,
-    STRIP
+    STRIPE
 }
