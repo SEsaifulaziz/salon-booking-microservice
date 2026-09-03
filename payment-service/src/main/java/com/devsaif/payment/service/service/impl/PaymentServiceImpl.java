@@ -121,14 +121,4 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
 
-    @Override
-    public Boolean proceedPayment(
-            PaymentOrder paymentOrder,
-            String paymentId,
-            String paymentLinkId
-    ) {
-        throw new UnsupportedOperationException(
-                "Payment confirmation will be handled b provider verification"
-        );
-    }
 }
