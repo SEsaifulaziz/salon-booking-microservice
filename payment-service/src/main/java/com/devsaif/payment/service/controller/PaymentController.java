@@ -48,4 +48,16 @@ public class PaymentController {
         return ResponseEntity.ok(paymentOrder);
     }
 
+    @PostMapping("/webhook/stripe")
+    public ResponseEntity<String> handleStripeWebhook(
+            @RequestBody String payload,
+            @RequestHeader("Stripe-Signature") String signature
+    ) {
+        System.out.println("Stripe webhook received");
+        System.out.println("Signature: " + signature);
+        System.out.println("Payload: " + payload);
+
+        return ResponseEntity.ok("Webhook received");
+    }
+
 }
