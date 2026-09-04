@@ -33,7 +33,7 @@ public class StripeWebhookService {
 
             if(paymentOrderId == null){
                 throw new IllegalStateException(
-                        "payment_order_id messing from Stripe session metadata"
+                        "payment_order_id missing from Stripe session metadata"
                 );
             }
 
@@ -62,6 +62,31 @@ public class StripeWebhookService {
 
             System.out.println(
                     "PaymentOrder found: " +  paymentOrder.getId()
+            );
+
+            Long stripeAmount = session.getAmountTotal();
+
+            System.out.println(
+                    "PaymentOrder amount: " + paymentOrder.getAmount()
+            );
+
+            System.out.println(
+                    "Stripe amount: " + stripeAmount
+            );
+
+            if(stripeAmount == null ||
+                !stripeAmount.equals(paymentOrder.getAmount())) {
+                throw new IllegalStateException(
+                        "Stripe amount does not match PaymentOrder amount"
+                );
+            }
+
+            System.out.println(
+                    "Stripe amount verified"
+            );
+
+            System.out.println(
+                    "PaymentOrder found: "  +  paymentOrder.getId()
             );
         }
     }
