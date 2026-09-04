@@ -7,6 +7,7 @@ import com.stripe.model.Event;
 import com.stripe.model.checkout.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ public class StripeWebhookService {
 
     private final PaymentOrderRepository paymentOrderRepository;
 
+    @Transactional
     public void handleEvent(Event event) throws Exception {
 
         if("checkout.session.completed".equals(event.getType())){
@@ -126,6 +128,8 @@ public class StripeWebhookService {
             paymentOrder.setProviderTransactionId(paymentIntentId);
             paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
             paymentOrder.setUpdatedAt(LocalDateTime.now());
+
+            paymentOrderRepository.save(paymentOrder);
 
             System.out.println(
                     "PaymentOrder marked as SUCCESS: "
