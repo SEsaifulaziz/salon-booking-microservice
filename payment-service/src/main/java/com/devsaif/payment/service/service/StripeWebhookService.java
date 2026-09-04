@@ -1,11 +1,14 @@
 package com.devsaif.payment.service.service;
 
+import com.devsaif.payment.service.domain.PaymentOrderStatus;
 import com.devsaif.payment.service.model.PaymentOrder;
 import com.devsaif.payment.service.repository.PaymentOrderRepository;
 import com.stripe.model.Event;
 import com.stripe.model.checkout.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -109,6 +112,31 @@ public class StripeWebhookService {
             System.out.println(
                     "Stripe client reference ID verified"
             );
+
+            if (paymentOrder.getStatus() == PaymentOrderStatus.SUCCESS) {
+                System.out.println(
+                        "PaymentOrder already processed: "
+                                + paymentOrder.getId()
+                );
+                return;
+            }
+
+            String paymentIntentId = session.getPaymentIntent();
+
+            paymentOrder.setProviderTransactionId(paymentIntentId);
+            paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+            paymentOrder.setUpdatedAt(LocalDateTime.now());
+
+            System.out.println(
+                    "PaymentOrder marked as SUCCESS: "
+                    + paymentIntentId
+            );
+
+            System.out.println(
+                    "Stripe PaymentIntent ID: "
+                    + paymentIntentId
+            );
+
 
             String stripeCurrency = session.getCurrency();
 
