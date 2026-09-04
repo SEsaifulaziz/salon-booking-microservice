@@ -1,4 +1,4 @@
-package com.devsaif.booking.service.domain;
+package com.devsaif.notifications.domain;
 
 public enum BookingStatus {
     PENDING,
