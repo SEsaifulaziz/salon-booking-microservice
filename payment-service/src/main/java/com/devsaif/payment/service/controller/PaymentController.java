@@ -7,6 +7,7 @@ import com.devsaif.payment.service.payload.dto.BookingDTO;
 import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
 import com.devsaif.payment.service.service.PaymentService;
+import com.devsaif.payment.service.service.StripeWebhookService;
 import com.devsaif.payment.service.service.client.UserFeignClient;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
@@ -25,6 +26,7 @@ public class PaymentController {
 
     private final PaymentService paymentService;
     private final UserFeignClient userFeignClient;
+    private final StripeWebhookService  stripeWebhookService;
 
     @Value("${payment.stripe.webhook-secret}")
     private String stripeWebhookSecret;
@@ -72,7 +74,8 @@ public class PaymentController {
            System.out.println("Stripe webhook verified");
            System.out.println("Event type: " + event.getType());
 
-           return ResponseEntity.ok("Webhook received");
+           stripeWebhookService.handleEvent(event);
+           return ResponseEntity.ok("Stripe webhook verified");
 
        }catch (SignatureVerificationException e){
            System.out.println("invalid stripe webhook signature");
