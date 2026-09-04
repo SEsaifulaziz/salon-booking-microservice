@@ -87,8 +87,11 @@ public class StripeWebhookService {
 
             String stripeCurrency = session.getCurrency();
 
+            String paymentOrderCurrency =
+                    paymentOrder.getCurrency();
+
             System.out.println(
-                    "PaymentOrder currency: " + paymentOrder.getCurrency()
+                    "PaymentOrder currency: " + paymentOrderCurrency
             );
 
             System.out.println(
@@ -96,7 +99,9 @@ public class StripeWebhookService {
             );
 
             if(stripeCurrency == null ||
-                    !stripeCurrency.equals(paymentOrder.getCurrency())) {
+                    paymentOrderCurrency == null || !stripeCurrency.trim().equalsIgnoreCase(
+                            paymentOrderCurrency.trim()
+            )) {
 
                 throw new IllegalStateException(
                         "Stripe currency does not match PaymentOrder currency"
