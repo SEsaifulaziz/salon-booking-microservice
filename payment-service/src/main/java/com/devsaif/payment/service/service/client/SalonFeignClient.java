@@ -1,6 +1,6 @@
-package com.devsaif.booking.service.service.client;
+package com.devsaif.payment.service.service.client;
 
-import com.devsaif.booking.service.dto.SalonDTO;
+import com.devsaif.payment.service.payload.dto.SalonDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
