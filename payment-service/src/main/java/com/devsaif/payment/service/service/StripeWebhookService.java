@@ -17,13 +17,16 @@ public class StripeWebhookService {
     public void handleEvent(Event event) throws Exception {
 
         if("checkout.session.completed".equals(event.getType())){
+
             Session session =  (Session) event.getDataObjectDeserializer()
-                    .getObject()
-                    .orElseThrow(() ->
-                            new IllegalStateException(
-                                    "Unable to deserialize Stripe Checkout Session"
-                            )
-                    );
+                    .deserializeUnsafe();
+
+            System.out.println("Stripe Session ID: "  + session.getId());
+            System.out.println("Stripe Session metadata: " +  session.getMetadata());
+            System.out.println(
+                    "Stripe Client Reference ID: "
+                    + session.getClientReferenceId()
+            );
 
             String paymentOrderId =
                     session.getMetadata().get("payment_order_id");
@@ -42,6 +45,20 @@ public class StripeWebhookService {
                                     "Payment order not found: " + paymentOrderId
                             )
                     );
+
+            System.out.println(
+                    "Stripe payment status: " + session.getPaymentStatus()
+            );
+
+            if(!"paid".equalsIgnoreCase(session.getPaymentStatus())){
+                throw new IllegalStateException(
+                        "Stripe payment is not completed"
+                );
+            }
+
+            System.out.println(
+                    "Stripe payment confirmed as paid"
+            );
 
             System.out.println(
                     "PaymentOrder found: " +  paymentOrder.getId()
