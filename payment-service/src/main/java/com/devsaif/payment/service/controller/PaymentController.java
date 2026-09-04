@@ -9,6 +9,7 @@ import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
 import com.devsaif.payment.service.service.PaymentService;
 import com.devsaif.payment.service.service.client.UserFeignClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,8 @@ public class PaymentController {
     private final PaymentService paymentService;
     private final UserFeignClient userFeignClient;
 
+    @Value("${payment.stripe.webhook-secret}")
+    private String stripeWebhookSecret;
 
     @PostMapping("/create")
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(
