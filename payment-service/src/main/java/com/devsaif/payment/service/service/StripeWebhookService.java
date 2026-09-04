@@ -85,6 +85,24 @@ public class StripeWebhookService {
                     "Stripe amount verified"
             );
 
+            String stripeCurrency = session.getCurrency();
+
+            System.out.println(
+                    "PaymentOrder currency: " + paymentOrder.getCurrency()
+            );
+
+            System.out.println(
+                    "Stripe currency: " + stripeCurrency
+            );
+
+            if(stripeCurrency == null ||
+                    !stripeCurrency.equals(paymentOrder.getCurrency())) {
+
+                throw new IllegalStateException(
+                        "Stripe currency does not match PaymentOrder currency"
+                );
+            }
+
             System.out.println(
                     "PaymentOrder found: "  +  paymentOrder.getId()
             );
