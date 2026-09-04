@@ -85,6 +85,31 @@ public class StripeWebhookService {
                     "Stripe amount verified"
             );
 
+            String clientReferenceId =
+                    session.getClientReferenceId();
+
+            System.out.println(
+                    "PaymentOrder ID: " +  paymentOrder.getId()
+            );
+
+            System.out.println(
+                    "Stripe Client Reference ID: " +  clientReferenceId
+            );
+
+            if(clientReferenceId == null ||
+                    !clientReferenceId.equals(
+                            paymentOrder.getId().toString()
+            )) {
+
+                throw new IllegalStateException(
+                        "Stripe client reference id does not match PaymentOrder ID"
+                );
+            }
+
+            System.out.println(
+                    "Stripe client reference ID verified"
+            );
+
             String stripeCurrency = session.getCurrency();
 
             String paymentOrderCurrency =
