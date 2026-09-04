@@ -39,7 +39,7 @@ public class StripePaymentProvider implements PaymentProvider {
                 )
 
                 .putMetadata(
-                        "paymetn_order_id",
+                        "payment_order_id",
                         paymentOrder.getId().toString()
                 )
 
