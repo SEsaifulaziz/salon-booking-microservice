@@ -8,8 +8,12 @@ import com.devsaif.payment.service.payload.dto.UserDTO;
 import com.devsaif.payment.service.payload.response.PaymentLinkResponse;
 import com.devsaif.payment.service.service.PaymentService;
 import com.devsaif.payment.service.service.client.UserFeignClient;
+import com.stripe.exception.SignatureVerificationException;
+import com.stripe.model.Event;
+import com.stripe.net.Webhook;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,11 +60,34 @@ public class PaymentController {
             @RequestBody String payload,
             @RequestHeader("Stripe-Signature") String signature
     ) {
-        System.out.println("Stripe webhook received");
-        System.out.println("Signature: " + signature);
-        System.out.println("Payload: " + payload);
 
-        return ResponseEntity.ok("Webhook received");
+       try{
+
+           Event event = Webhook.constructEvent(
+                   payload,
+                   signature,
+                   stripeWebhookSecret
+           );
+
+           System.out.println("Stripe webhook verified");
+           System.out.println("Event type: " + event.getType());
+
+           return ResponseEntity.ok("Webhook received");
+
+       }catch (SignatureVerificationException e){
+           System.out.println("invalid stripe webhook signature");
+
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                   .body("Invalid webhook signature");
+
+       }catch (Exception e){
+           System.out.println("Webhook processing error: " + e.getMessage());
+
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                   .body("Webhook processing failed");
+       }
+
+
     }
 
 }
