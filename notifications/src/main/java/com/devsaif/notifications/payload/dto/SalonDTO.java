@@ -1,4 +1,4 @@
-package com.devsaif.booking.service.dto;
+package com.devsaif.notifications.payload.dto;
 
 import lombok.Data;
 
