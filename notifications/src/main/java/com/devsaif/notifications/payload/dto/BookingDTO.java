@@ -1,6 +1,6 @@
-package com.devsaif.booking.service.dto;
+package com.devsaif.notifications.payload.dto;
 
-import com.devsaif.booking.service.domain.BookingStatus;
+import com.devsaif.notifications.domain.BookingStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
