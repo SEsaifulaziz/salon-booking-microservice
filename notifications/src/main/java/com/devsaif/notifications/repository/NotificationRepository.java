@@ -1,15 +1,15 @@
 package com.devsaif.notifications.repository;
 
-import com.devsaif.notifications.model.NotificationEntity;
+import com.devsaif.notifications.model.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<NotificationEntity, Long> {
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
-    List<NotificationEntity> findByUserId(Long userId);
-    List<NotificationEntity> findBySalonId(Long  salonId);
+    List<Notification> findByUserId(Long userId);
+    List<Notification> findBySalonId(Long  salonId);
 
 }
