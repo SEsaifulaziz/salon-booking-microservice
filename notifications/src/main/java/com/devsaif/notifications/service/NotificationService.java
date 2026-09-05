@@ -1,6 +1,6 @@
 package com.devsaif.notifications.service;
 
-import com.devsaif.notifications.model.NotificationEntity;
+import com.devsaif.notifications.model.Notification;
 import com.devsaif.notifications.payload.dto.NotificationDTO;
 
 import java.util.List;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface NotificationService {
 
-    NotificationDTO createNotification(NotificationDTO notificationDTO);
+    NotificationDTO createNotification(Notification notification) throws Exception;
 
-    List<NotificationEntity> getAllNotificationsByUserId(Long userId);
-    List<NotificationEntity> getAllNotificationsBySalonId(Long salonId);
+    List<Notification> getAllNotificationsByUserId(Long userId);
+    List<Notification> getAllNotificationsBySalonId(Long salonId);
 
-    NotificationEntity markNotificationAsRead(Long notificationId);
+    Notification markNotificationAsRead(Long notificationId) throws Exception;
 
 }
