@@ -1,6 +1,8 @@
 package com.devsaif.notifications.service.impl;
 
-import com.devsaif.notifications.model.NotificationEntity;
+import com.devsaif.notifications.mapper.NotificationMapper;
+import com.devsaif.notifications.model.Notification;
+import com.devsaif.notifications.payload.dto.BookingDTO;
 import com.devsaif.notifications.payload.dto.NotificationDTO;
 import com.devsaif.notifications.repository.NotificationRepository;
 import com.devsaif.notifications.service.NotificationService;
@@ -19,22 +21,38 @@ public class NotificationServiceImpl implements NotificationService {
 
 
     @Override
-    public NotificationDTO createNotification(NotificationDTO notificationDTO) {
-        return null;
+    public NotificationDTO createNotification(Notification notification) throws Exception{
+
+        Notification savedNotification = notificationRepository.save(notification);
+
+        BookingDTO  bookingDTO = bookingFeignClient.getBookingsByBookingId(
+                savedNotification.getBookingId()).getBody();
+
+        NotificationDTO notificationDTO = NotificationMapper.toDTO(
+                savedNotification, bookingDTO
+        );
+
+        return notificationDTO;
     }
 
     @Override
-    public List<NotificationEntity> getAllNotificationsByUserId(Long userId) {
-        return List.of();
+    public List<Notification> getAllNotificationsByUserId(Long userId) {
+        return notificationRepository.findByUserId(userId);
     }
 
     @Override
-    public List<NotificationEntity> getAllNotificationsBySalonId(Long salonId) {
-        return List.of();
+    public List<Notification> getAllNotificationsBySalonId(Long salonId) {
+        return notificationRepository.findBySalonId(salonId);
     }
 
     @Override
-    public NotificationEntity markNotificationAsRead(Long notificationId) {
-        return null;
+    public Notification markNotificationAsRead(Long notificationId) throws Exception {
+
+        return notificationRepository.findById(notificationId).map(
+                notification -> {
+                    notification.setIsRead(true);
+                    return notificationRepository.save(notification);
+                }
+        ).orElseThrow(() -> new Exception("Notification not found"));
     }
 }
