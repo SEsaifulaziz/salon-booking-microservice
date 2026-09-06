@@ -1,4 +1,4 @@
-package com.devsaif.notifications.payload.dto;
+package com.devsaif.payment.service.payload.dto;
 
 import lombok.Data;
 
