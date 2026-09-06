@@ -1,4 +1,4 @@
-package com.devsaif.notifications.payload.dto;
+package com.devsaif.review.dto;
 
 import lombok.Data;
 
