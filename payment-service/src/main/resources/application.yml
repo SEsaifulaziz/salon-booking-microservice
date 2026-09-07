@@ -8,6 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
 
   datasource:
     url: jdbc:mysql://localhost:3306/payment_db?createDatabaseIfNotExist=true
@@ -15,7 +16,12 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-spring.jpa.show-sql: true
+
+  rabbitmq:
+    port: 5672
+    host: localhost
+    username: guest
+    password: guest
 
 stripe:
   api:
