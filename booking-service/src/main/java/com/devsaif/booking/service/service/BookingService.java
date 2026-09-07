@@ -7,6 +7,7 @@ import com.devsaif.booking.service.dto.SalonDTO;
 import com.devsaif.booking.service.dto.ServiceDTO;
 import com.devsaif.booking.service.dto.UserDTO;
 import com.devsaif.booking.service.model.Booking;
+import com.devsaif.booking.service.model.PaymentOrder;
 import com.devsaif.booking.service.model.SalonReport;
 
 import java.time.LocalDate;
@@ -25,4 +26,6 @@ public interface BookingService {
     Booking updateBooking(Long id, BookingStatus bookingStatus) throws Exception;
     List<Booking> getBookingsByDate(LocalDate date, Long salonId);
     SalonReport getSalonReport(Long salonId);
+
+    Booking bookingSuccess(PaymentOrder paymentOrder) throws Exception;
 }
