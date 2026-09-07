@@ -1,39 +1,51 @@
-package com.devsaif.payment.service.configuration;
+package com.devsaif.booking.service.configuration;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 
 
 @Configuration
 public class RabbitMQConfig {
 
+    public static final String PAYMENT_EVENTS_EXCHANGE = "payment.events";
+    public static final String BOOKING_QUEUE = "booking.payment-successful.queue";
+
     @Bean
-    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
+    public FanoutExchange paymentEventsExchange() {
+        return new FanoutExchange(PAYMENT_EVENTS_EXCHANGE);
+    }
+
+    @Bean
+    public Queue bookingPaymentSuccessfulQueue() {
+        return new Queue(BOOKING_QUEUE, true);
+    }
+
+    @Bean
+    public Binding bookingQueueBinding(Queue bookingPaymentSuccessfulQueue,
+                                       FanoutExchange paymentEventsExchange) {
+        return BindingBuilder.bind(bookingPaymentSuccessfulQueue).to(paymentEventsExchange);
+    }
+
+    @Bean
+    public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
             ConnectionFactory connectionFactory,
-            Jackson2JsonMessageConverter jackson2JsonMessageConverter
-    ) {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter);
-        return rabbitTemplate;
-    }
-
-    @Bean
-    public Queue bookingQueue() {
-        return new Queue("booking-queue");
-    }
-
-    @Bean
-    public Queue notificationQueue() {
-        return new Queue("notification-queue");
+            MessageConverter jsonMessageConverter) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(jsonMessageConverter);
+        return factory;
     }
 }
