@@ -1,1 +1,27 @@
-spring.application.name=review
+
+server:
+  port: 5009
+spring:
+  application:
+    name: review-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/review_db?createDatabaseIfNotExist=true
+    username: root
+    password: topik712
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
+
+spring.jpa.show-sql: true
