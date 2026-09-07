@@ -1,7 +1,7 @@
-package com.devsaif.payment.service.model;
+package com.devsaif.booking.service.model;
 
-import com.devsaif.payment.service.domain.PaymentMethod;
-import com.devsaif.payment.service.domain.PaymentOrderStatus;
+
+import com.devsaif.booking.service.domain.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,10 +20,6 @@ public class PaymentOrder {
 
     @Column(nullable = false, length = 3)
     private String currency;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PaymentOrderStatus status = PaymentOrderStatus.CREATED;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
