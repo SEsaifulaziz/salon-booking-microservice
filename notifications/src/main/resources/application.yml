@@ -14,6 +14,13 @@ spring:
     password: topik712
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  rabbitmq:
+    port: 5672
+    host: localhost
+    username: guest
+    password: guest
+
+
 eureka:
   instance:
     prefer-ip-address: true
