@@ -50,6 +50,13 @@ spring:
               uri: lb://NOTIFICATION-SERVICE
               predicates:
                 - Path=/api/notifications/**
+
+            - id: REVIEW-SERVICE
+              uri: lb://REVIEW-SERVICE
+              predicates:
+                - Path=/api/reviews/**
+
+
   security:
     oauth2:
       resourceserver:
