@@ -1,4 +1,4 @@
-package com.devsaif.payment.service.messaging;
+package com.devsaif.booking.service.messaging;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
