@@ -14,11 +14,10 @@ public class PaymentEventListener {
     private final BookingService bookingService;
 
     @RabbitListener(queues = RabbitMQConfig.BOOKING_QUEUE)
-    public void onPaymentSuccessful(PaymentSuccessfulEvent event) {
-        try {
-            bookingService.updateBooking(event.getBookingId(), BookingStatus.CONFIRMED);
-        } catch (Exception e) {
-            System.err.println("Failed to confirm booking " + event.getBookingId() + ": " + e.getMessage());
-        }
+    public void onPaymentSuccessful(PaymentSuccessfulEvent event) throws Exception {
+        bookingService.updateBooking(
+                event.getBookingId(),
+                BookingStatus.CONFIRMED
+        );
     }
 }
