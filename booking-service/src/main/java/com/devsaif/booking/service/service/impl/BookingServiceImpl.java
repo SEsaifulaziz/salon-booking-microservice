@@ -6,7 +6,6 @@ import com.devsaif.booking.service.dto.SalonDTO;
 import com.devsaif.booking.service.dto.ServiceDTO;
 import com.devsaif.booking.service.dto.UserDTO;
 import com.devsaif.booking.service.model.Booking;
-import com.devsaif.booking.service.model.PaymentOrder;
 import com.devsaif.booking.service.model.SalonReport;
 import com.devsaif.booking.service.repository.BookingRepository;
 import com.devsaif.booking.service.service.BookingService;
@@ -149,10 +148,4 @@ public class BookingServiceImpl implements BookingService {
         return report;
     }
 
-    @Override
-    public Booking bookingSuccess(PaymentOrder paymentOrder) throws Exception {
-        Booking existingBooking = getBookingById(paymentOrder.getBookingId());
-        existingBooking.setStatus(BookingStatus.CONFIRMED);
-        return bookingRepo.save(existingBooking);
-    }
 }
