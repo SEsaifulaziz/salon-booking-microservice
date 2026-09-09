@@ -23,14 +23,18 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue bookingPaymentSuccessfulQueue() {
+    public Queue notificationPaymentSuccessfulQueue() {
         return new Queue(NOTIFICATION_QUEUE, true);
     }
 
     @Bean
-    public Binding bookingQueueBinding(Queue bookingPaymentSuccessfulQueue,
-                                       FanoutExchange paymentEventsExchange) {
-        return BindingBuilder.bind(bookingPaymentSuccessfulQueue).to(paymentEventsExchange);
+    public Binding notificationQueueBinding(
+            Queue bookingPaymentSuccessfulQueue,
+            FanoutExchange paymentEventsExchange
+    ) {
+        return BindingBuilder
+                .bind(bookingPaymentSuccessfulQueue)
+                .to(paymentEventsExchange);
     }
 
     @Bean
@@ -41,10 +45,14 @@ public class RabbitMQConfig {
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
             ConnectionFactory connectionFactory,
-            MessageConverter jsonMessageConverter) {
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(jsonMessageConverter);
+            MessageConverter jsonMessageConverter
+    ) {
+        SimpleRabbitListenerContainerFactory factory =
+                new SimpleRabbitListenerContainerFactory();
+        factory
+                .setConnectionFactory(connectionFactory);
+        factory
+                .setMessageConverter(jsonMessageConverter);
         return factory;
     }
 }
