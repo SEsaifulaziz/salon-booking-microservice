@@ -17,19 +17,19 @@ public class PaymentEventListener {
     private final NotificationService notificationService;
 
     @RabbitListener(queues = RabbitMQConfig.NOTIFICATION_QUEUE)
-    public void onPaymentSuccessful(PaymentSuccessfulEvent event) {
-        try {
+    public void onPaymentSuccessful(PaymentSuccessfulEvent event) throws Exception {
+
             Notification notification = new Notification();
             notification.setType("PAYMENT_SUCCESSFUL");
-            notification.setDescription("Your payment was successful and your booking is confirmed.");
+            notification.setDescription(
+                    "Your payment was successful and your booking is confirmed."
+            );
             notification.setUserId(event.getUserId());
             notification.setBookingId(event.getBookingId());
             notification.setSalonId(event.getSalonId());
             notification.setCreatedAt(LocalDateTime.now());
 
             notificationService.createNotification(notification);
-        } catch (Exception e) {
-            System.err.println("Failed to create notification for booking " + event.getBookingId() + ": " + e.getMessage());
-        }
+
     }
 }
