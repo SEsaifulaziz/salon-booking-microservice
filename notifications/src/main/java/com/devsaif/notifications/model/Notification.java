@@ -28,5 +28,7 @@ public class Notification {
 
     private Long salonId;
 
+    private Long paymentOrderId;
+
     private LocalDateTime createdAt;
 }
