@@ -1,14 +1,19 @@
 package com.devsaif.notifications.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_notification_payment_order_type",
+                        columnNames = {"paymentOrderId", "type"}
+                )
+        }
+)
 @Data
 public class Notification {
 
