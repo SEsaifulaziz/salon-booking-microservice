@@ -37,6 +37,7 @@ public class PaymentEventListener {
             notification.setDescription(
                     "Your payment was successful and your booking is confirmed."
             );
+            notification.setPaymentOrderId(event.getPaymentOrderId());
             notification.setUserId(event.getUserId());
             notification.setBookingId(event.getBookingId());
             notification.setSalonId(event.getSalonId());
