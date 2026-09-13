@@ -23,6 +23,12 @@ public class PaymentEventListener {
     @RabbitListener(queues = RabbitMQConfig.NOTIFICATION_QUEUE)
     public void onPaymentSuccessful(PaymentSuccessfulEvent event) throws Exception {
 
+        if(event.getPaymentOrderId() == null){
+            throw new IllegalArgumentException(
+                    "Payment Order ID is required for payment successful event"
+            );
+        }
+
         boolean alreadyExists = notificationRepository
                 .existsByPaymentOrderIdAndType(
                         event.getPaymentOrderId(),
